@@ -1,10 +1,12 @@
 "use client";
+import ColorSchemeToggle from "@/components/ColorSchemeToggle";
 import CustomInput from "@/components/CustomInput";
 import CustomQuote from "@/components/CustomQuote";
 import WelcomeComponent from "@/components/Welcome";
 export default function HomeView() {
   return (
     <>
+      <ColorSchemeToggle />
       <WelcomeComponent />
       <CustomQuote
         source={

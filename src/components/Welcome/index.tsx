@@ -16,8 +16,8 @@ export default function WelcomeComponent() {
         </Text>
       </Title>
       <Text c="dimmed" ta="center" size="lg" maw={580} mx="auto" mt="xl">
-        MindDump helps you capture and organize your thoughts, whether youre an
-        overthinker or a creative genius. Start by jotting down your ideas,
+        MindDump helps you capture and organize your thoughts, whether you are
+        an overthinker or a creative genius. Start by jotting down your ideas,
         thoughts, and inspirations.
         <Anchor href="https://mantine.dev/guides/next/" size="lg">
           Learn how to get started
