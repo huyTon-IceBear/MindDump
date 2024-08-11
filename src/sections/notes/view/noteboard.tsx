@@ -1,11 +1,7 @@
+import { NoteBoardProps } from "@/types/section";
 import { List } from "@mantine/core";
-import { useState } from "react";
 
-type Props = {
-  notes: string[];
-};
-
-export default function NoteBoard({ notes }: Props) {
+export default function NoteBoard({ notes }: NoteBoardProps) {
   const notesList = notes.map((note) => (
     <List key={"note"}>
       <List.Item>{note}</List.Item>
