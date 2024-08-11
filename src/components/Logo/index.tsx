@@ -12,6 +12,7 @@ export default function Logo({ size }: Props) {
       variant="gradient"
       component="span"
       gradient={{ from: "blue", to: "green" }}
+      size="xs"
     >
       MindDump
     </Text>

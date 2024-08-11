@@ -2,15 +2,14 @@
 import ColorSchemeToggle from "@/components/ColorSchemeToggle";
 import CustomQuote from "@/components/CustomQuote";
 import WelcomeComponent from "@/components/Welcome";
-import { Button } from "@mantine/core";
+import { Button, Stack } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
 export default function HomeView() {
   const router = useRouter();
 
   return (
-    <>
-      <ColorSchemeToggle />
+    <Stack>
       <WelcomeComponent />
       <CustomQuote
         source={
@@ -21,6 +20,6 @@ export default function HomeView() {
       <Button variant="filled" onClick={() => router.push("/notes")}>
         Button
       </Button>
-    </>
+    </Stack>
   );
 }
