@@ -3,11 +3,9 @@
 import { Box, Flex, AppShell } from "@mantine/core";
 import Header from "./header";
 import classes from "./layout.module.css";
+import { LayoutProps } from "@/types/layout";
 
-type Props = {
-  children: React.ReactNode;
-};
-export default function DefaultLayout({ children }: Props) {
+export default function DefaultLayout({ children }: LayoutProps) {
   return (
     <AppShell className={classes.root}>
       <Header />

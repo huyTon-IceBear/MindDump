@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { TextInput } from "@mantine/core";
+import { CustomInputProps } from "@/types/component";
 
-type Props = {
-  onComplete: (note: string) => void;
-};
-export default function CustomInput({ onComplete }: Props) {
+export default function CustomInput({ onComplete }: CustomInputProps) {
   const [value, setValue] = useState("");
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
