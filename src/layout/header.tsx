@@ -15,20 +15,14 @@ export default function Header() {
       <Group
         h={1}
         mih={1}
-        mr={2.5}
+        mr={20}
+        ml={20}
         align={"center"}
         display={"flex"}
         justify="space-between"
       >
         <Logo />
         <ColorSchemeToggle />
-        {/* <HeaderControls
-        visibleFrom="sm"
-        githubLink="https://github.com/mantinedev/mantine"
-        withDirectionToggle={false}
-        withSearch={false}
-        discordLink={meta.discordLink}
-      /> */}
       </Group>
     </AppShell.Header>
   );

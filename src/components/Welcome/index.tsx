@@ -4,7 +4,7 @@ import classes from "./Welcome.module.css";
 export default function WelcomeComponent() {
   return (
     <div>
-      <Title className={classes.title} ta="center" mt={100}>
+      <Title className={classes.title} ta="center">
         Welcome to{" "}
         <Text
           inherit
@@ -19,10 +19,6 @@ export default function WelcomeComponent() {
         MindDump helps you capture and organize your thoughts, whether you are
         an overthinker or a creative genius. Start by jotting down your ideas,
         thoughts, and inspirations.
-        <Anchor href="https://mantine.dev/guides/next/" size="lg">
-          Learn how to get started
-        </Anchor>
-        . Let your mind flow freely.
       </Text>
     </div>
   );
