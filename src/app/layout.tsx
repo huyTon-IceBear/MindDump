@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
+import DefaultLayout from "@/layout/layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +33,9 @@ export default function RootLayout({
         <title>MindDump - Capture Your Thoughts</title>
       </head>
       <body className={inter.className}>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider>
+          <DefaultLayout>{children}</DefaultLayout>
+        </MantineProvider>
       </body>
     </html>
   );

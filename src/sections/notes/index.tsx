@@ -13,15 +13,12 @@ export default function NoteView() {
   }
   return (
     <Stack
-      h={"100vh"}
       bg="var(--mantine-color-body)"
       align="center"
       justify="center"
       gap="md"
+      mt={100}
     >
-      <Stack>
-        <Logo />
-      </Stack>
       <Stack w={400}>
         <CustomInput onComplete={handleAddNote} />
       </Stack>

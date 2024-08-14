@@ -1,28 +1,24 @@
-import { Title, Text, Anchor } from "@mantine/core";
+import { Title, Text } from "@mantine/core";
 import classes from "./Welcome.module.css";
 
 export default function WelcomeComponent() {
   return (
     <div>
-      <Title className={classes.title} ta="center" mt={100}>
-        Welcome to{" "}
+      <Title className={classes.title}>
+        A{" "}
         <Text
           inherit
           variant="gradient"
           component="span"
-          gradient={{ from: "blue", to: "green" }}
+          gradient={{ from: "blue", to: "green", deg: 90 }}
         >
-          MindDump
-        </Text>
+          web tool
+        </Text>{" "}
+        for capturing thoughts
       </Title>
-      <Text c="dimmed" ta="center" size="lg" maw={580} mx="auto" mt="xl">
-        MindDump helps you capture and organize your thoughts, whether you are
-        an overthinker or a creative genius. Start by jotting down your ideas,
-        thoughts, and inspirations.
-        <Anchor href="https://mantine.dev/guides/next/" size="lg">
-          Learn how to get started
-        </Anchor>
-        . Let your mind flow freely.
+      <Text size="lg" mt="xl" className={classes.description}>
+        Start by jotting down your ideas and inspirations, and let MindDump help
+        you manage and enhance your mental workflow.
       </Text>
     </div>
   );
