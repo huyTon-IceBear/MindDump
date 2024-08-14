@@ -2,15 +2,11 @@
   --footer-height: 120px;
 }
 
-.main {
-  padding-bottom: var(--footer-height);
-  min-height: 100vh;
-}
-
 .content {
+  min-height: 100vh;
   position: relative;
-  padding-top: 220px;
-  padding-bottom: 180px;
+  padding-top: 120px;
+  padding-bottom: 40px;
   z-index: 1;
   background-color: var(--mantine-color-body);
   box-shadow: var(--mantine-shadow-md);

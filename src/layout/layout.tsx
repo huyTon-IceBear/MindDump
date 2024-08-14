@@ -9,7 +9,7 @@ export default function DefaultLayout({ children }: LayoutProps) {
   return (
     <AppShell className={classes.root}>
       <Header />
-      <AppShell.Main className={classes.main}>
+      <AppShell.Main>
         <div className={classes.content}>{children}</div>
       </AppShell.Main>
     </AppShell>

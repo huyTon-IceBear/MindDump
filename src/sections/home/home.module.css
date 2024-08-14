@@ -2,7 +2,7 @@ $button-breakpoint: em(960px);
 
 .inner {
   position: relative;
-  padding-bottom: 180px;
+  padding-bottom: 40px;
 
   @media (max-width: $button-breakpoint) {
     padding-top: 60px;
