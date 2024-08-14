@@ -1,0 +1,57 @@
+$button-breakpoint: em(960px);
+
+.inner {
+  position: relative;
+  padding-bottom: 40px;
+
+  @media (max-width: $button-breakpoint) {
+    padding-top: 60px;
+    padding-bottom: 90px;
+  }
+}
+
+.controls {
+  margin-top: calc(var(--mantine-spacing-xl) * 1.5);
+
+  @media (max-width: $button-breakpoint) {
+    margin-top: var(--mantine-spacing-xl);
+  }
+}
+
+.control {
+  height: 64px;
+  padding-left: 46px;
+  padding-right: 46px;
+  font-size: 20px;
+  font-weight: 700;
+  border: 0;
+
+  @media (max-width: $button-breakpoint) {
+    height: 54px;
+    padding-left: 18px;
+    padding-right: 18px;
+    flex: 1;
+  }
+
+  &[data-primary] {
+    background-image: var(--docs-home-page-gradient);
+  }
+
+  &[data-github] {
+    background-color: var(--mantine-color-black);
+    color: var(--mantine-color-white);
+
+    & :global(.mantine-Button-section) {
+      margin-right: 16px;
+
+      @mixin rtl {
+        margin-right: 0;
+        margin-left: 16px;
+      }
+    }
+
+    @mixin hover {
+      background-color: var(--mantine-color-dark-6);
+    }
+  }
+}
