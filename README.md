@@ -65,6 +65,29 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Running with Docker
+To build and run the application using Docker:
+
+### Build the Docker Image:
+
+```bash
+docker build -t minddump-app .
+```
+
+This command builds the Docker image using the Dockerfile in the project directory and tags it as minddump-app.
+
+### Run the Docker Container:
+
+``` bash
+docker run -p 3000:3000 minddump-app
+```
+
+This command runs a container from the minddump-app image and maps port 3000 of the container to port 3000 on your host machine.
+
+### Access the Application:
+
+Open http://localhost:3000 in your browser to see the application running inside the Docker container.
+
 ## Contributing
 Contributions are welcome! Please fork the repository and use a feature branch. Pull requests are warmly welcome.
 
