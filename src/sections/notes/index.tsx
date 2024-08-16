@@ -4,6 +4,7 @@ import { Stack, Text } from "@mantine/core";
 import { useState } from "react";
 import NoteBoard from "./view/noteboard";
 import Logo from "@/components/Logo";
+import StarryBackground from "@/components/StarryBackground";
 
 export default function NoteView() {
   const [notes, setNotes] = useState<string[]>(["something stupid"]);
@@ -22,6 +23,7 @@ export default function NoteView() {
         <CustomInput onComplete={handleAddNote} />
       </Stack>
       <NoteBoard notes={notes} />
+      <StarryBackground />
     </Stack>
   );
 }

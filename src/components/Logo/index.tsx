@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Anchor, Text } from "@mantine/core";
+import { Anchor } from "@mantine/core";
 import classes from "./Logo.module.css";
 import { LogoProps } from "@/types/component";
 
