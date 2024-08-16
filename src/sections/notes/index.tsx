@@ -17,7 +17,6 @@ export default function NoteView() {
       align="center"
       justify="center"
       gap="md"
-      mt={100}
     >
       <Stack w={400}>
         <CustomInput onComplete={handleAddNote} />

@@ -1,17 +1,20 @@
-import { ActionIcon, Text } from "@mantine/core";
+import Link from "next/link";
+import { Anchor, Text } from "@mantine/core";
 import classes from "./Logo.module.css";
 import { LogoProps } from "@/types/component";
 
 export default function Logo({ size }: LogoProps) {
   return (
-    <Text
+    <Anchor
+      component={Link}
+      href="/"
+      underline="never"
       className={classes.title}
       variant="gradient"
-      component="span"
       gradient={{ from: "blue", to: "green" }}
       size="xs"
     >
       MindDump
-    </Text>
+    </Anchor>
   );
 }
