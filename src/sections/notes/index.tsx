@@ -5,6 +5,7 @@ import { useState } from "react";
 import NoteBoard from "./view/noteboard";
 import Logo from "@/components/Logo";
 import StarryBackground from "@/components/StarryBackground";
+import Typewriter from "@/components/Typewritter";
 
 export default function NoteView() {
   const [notes, setNotes] = useState<string[]>(["something stupid"]);
@@ -23,6 +24,7 @@ export default function NoteView() {
         <CustomInput onComplete={handleAddNote} />
       </Stack>
       <NoteBoard notes={notes} />
+      <Typewriter />
       <StarryBackground />
     </Stack>
   );
