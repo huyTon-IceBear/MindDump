@@ -11,3 +11,10 @@ export interface LogoProps {
     size?: "small" | "normal" | "large";
 };
   
+export interface StarsGroupProps {
+    screenWidth: number;
+    color: string;
+    density: number;
+    speed: number;
+    delay: number;
+};
