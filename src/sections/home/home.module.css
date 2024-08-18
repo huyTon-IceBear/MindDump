@@ -20,8 +20,6 @@ $button-breakpoint: em(960px);
 
 .control {
   height: 64px;
-  padding-left: 46px;
-  padding-right: 46px;
   font-size: 20px;
   font-weight: 700;
   border: 0;

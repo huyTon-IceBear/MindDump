@@ -1,11 +1,10 @@
 "use client";
 import CustomInput from "@/components/CustomInput";
-import { Stack, Text } from "@mantine/core";
+import { Stack } from "@mantine/core";
 import { useState } from "react";
 import NoteBoard from "./view/noteboard";
-import Logo from "@/components/Logo";
 import StarryBackground from "@/components/StarryBackground";
-import Typewriter from "@/components/Typewritter";
+import TypeWriter from "@/components/TypeWriter";
 
 export default function NoteView() {
   const [notes, setNotes] = useState<string[]>(["something stupid"]);
@@ -24,7 +23,7 @@ export default function NoteView() {
         <CustomInput onComplete={handleAddNote} />
       </Stack>
       <NoteBoard notes={notes} />
-      <Typewriter />
+      <TypeWriter />
       <StarryBackground />
     </Stack>
   );
