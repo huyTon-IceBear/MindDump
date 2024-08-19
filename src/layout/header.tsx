@@ -11,7 +11,7 @@ import {
 
 export default function Header() {
   return (
-    <AppShell.Header className={RemoveScroll.classNames.zeroRight}>
+    <AppShell.Header zIndex={2} className={RemoveScroll.classNames.zeroRight}>
       <Group
         h={1}
         mih={1}
