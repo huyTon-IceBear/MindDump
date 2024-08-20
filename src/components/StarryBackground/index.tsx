@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import classes from "./StarryBackground.module.css";
 import { StarsGroupProps } from "@/types/component";
+import useWindowDimensions from "@/hooks/useWindowDimensions";
 
 const generateRandomStars = (
   screenWidth: number,
@@ -45,7 +46,7 @@ function StarsGroup({
 }
 
 export default function StarryBackground() {
-  const screenWidth = 1800;
+  const { width } = useWindowDimensions();
   const color = "#fff";
   const density = 200;
   const speed = 1;
@@ -58,13 +59,13 @@ export default function StarryBackground() {
         background: "inherit",
         position: "relative",
         width: "100%",
-        height: "100vh",
+        top: "-100px",
       }}
     >
       {delays.map((delay, index) => (
         <StarsGroup
           key={index}
-          screenWidth={screenWidth}
+          screenWidth={width}
           color={color}
           density={density}
           speed={speed}

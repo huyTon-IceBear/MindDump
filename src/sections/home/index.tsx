@@ -7,7 +7,7 @@ import classes from "./home.module.css";
 
 export default function HomeView() {
   return (
-    <Container size={1200} className={classes.inner}>
+    <Container className={classes.inner}>
       <WelcomeComponent />
       <CustomQuote
         source={
