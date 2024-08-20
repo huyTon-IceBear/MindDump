@@ -47,9 +47,6 @@ function StarsGroup({
 
 export default function StarryBackground() {
   const { width } = useWindowDimensions();
-
-  console.log("here is the screen width", width);
-  // const screenWidth = 1800;
   const color = "#fff";
   const density = 200;
   const speed = 1;
