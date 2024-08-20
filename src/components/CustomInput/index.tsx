@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { TextInput } from "@mantine/core";
 import { CustomInputProps } from "@/types/component";
+import { useNotesDispatch } from "@/context/NotesProvider";
+import { ActionTypes } from "@/types/note";
 
-export default function CustomInput({ onComplete }: CustomInputProps) {
+export default function CustomInput() {
   const [value, setValue] = useState("");
+
+  const dispatch = useNotesDispatch();
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      onComplete(value);
+      dispatch({ type: ActionTypes.ADD_NOTE, text: value });
       setValue("");
     }
   };

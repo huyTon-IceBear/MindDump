@@ -14,17 +14,17 @@ export enum ActionTypes {
 export type AddNoteAction = {
     type: ActionTypes.ADD_NOTE;
     text: string;
-  };
+};
   
   export type ChangeNoteAction = {
     type: ActionTypes.CHANGE_NOTE;
     note: Note;
-  };
+};
   
   export type DeleteNoteAction = {
     type: ActionTypes.DELETE_NOTE;
     id: string;
-  };
+};
 
 export type NoteAction = 
 | AddNoteAction

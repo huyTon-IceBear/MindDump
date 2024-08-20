@@ -20,12 +20,26 @@ export function NotesProvider({ children }: ContextProviderProps) {
   );
 }
 
-export function useTasks() {
-  return useContext(NotesContext);
+export function useNotes() {
+  const context = useContext(NotesContext);
+
+  if (!context) {
+    throw new Error("The Context must be used within an ContextProvider");
+  }
+
+  return context;
 }
 
-export function useTasksDispatch() {
-  return useContext(NotesDispatchContext);
+export function useNotesDispatch() {
+  const dispatch = useContext(NotesDispatchContext);
+
+  if (dispatch === null) {
+    throw new Error(
+      "useNotesDispatch must be used within a NotesDispatchContextProvider"
+    );
+  }
+
+  return dispatch;
 }
 
 function notesReducer(notes: Note[], action: NoteAction): Note[] {
