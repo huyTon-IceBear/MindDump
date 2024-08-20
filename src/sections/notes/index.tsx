@@ -8,7 +8,6 @@ import TypeWriter from "@/components/TypeWriter";
 
 export default function NoteView() {
   const [notes, setNotes] = useState<string[]>(["something stupid"]);
-  const [load, setLoad] = useState<boolean>(false);
   function handleAddNote(note: string) {
     setNotes([...notes, note]);
   }

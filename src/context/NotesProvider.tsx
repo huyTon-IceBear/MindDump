@@ -1,7 +1,8 @@
 "use client";
 
 import { ContextProviderProps, NoteContextType } from "@/types/context";
-import { Note, NoteAction } from "@/types/note";
+import { ActionTypes, Note, NoteAction } from "@/types/note";
+import { nanoid } from "nanoid";
 import { createContext, useContext, useReducer } from "react";
 
 export const NotesContext = createContext<NoteContextType | null>(null);
@@ -29,16 +30,16 @@ export function useTasksDispatch() {
 
 function notesReducer(notes: Note[], action: NoteAction): Note[] {
   switch (action.type) {
-    case "added": {
+    case ActionTypes.ADD_NOTE: {
       return [
         ...notes,
         {
-          id: action.id,
+          id: nanoid(),
           text: action.text,
         },
       ];
     }
-    case "changed": {
+    case ActionTypes.CHANGE_NOTE: {
       return notes.map((n) => {
         if (n.id === action.note.id) {
           return action.note;
@@ -47,7 +48,7 @@ function notesReducer(notes: Note[], action: NoteAction): Note[] {
         }
       });
     }
-    case "deleted": {
+    case ActionTypes.DELETE_NOTE: {
       return notes.filter((n) => n.id !== action.id);
     }
     default: {
