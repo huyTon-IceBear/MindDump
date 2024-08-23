@@ -18,3 +18,8 @@ export interface StarsGroupProps {
     speed: number;
     delay: number;
 };
+
+export interface TypeWriterProps{
+    text: string;
+    speed: number;
+}

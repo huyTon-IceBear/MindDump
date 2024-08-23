@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { TextInput } from "@mantine/core";
-import { CustomInputProps } from "@/types/component";
 import { useNotesDispatch } from "@/context/NotesProvider";
 import { ActionTypes } from "@/types/note";
 

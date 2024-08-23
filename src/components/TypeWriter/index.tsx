@@ -1,10 +1,29 @@
-import classes from "./TypeWriter.module.css";
-import { Text } from "@mantine/core";
+import { TypeWriterProps } from "@/types/component";
+import { Stack, Text } from "@mantine/core";
+import { useEffect, useState } from "react";
 
-export default function TypeWriter() {
+export default function TypeWriter({ text, speed }: TypeWriterProps) {
+  const [displayText, setDisplayText] = useState("");
+
+  useEffect(() => {
+    let i = 0;
+    const typingInterval = setInterval(() => {
+      if (i < text.length) {
+        setDisplayText((prevText) => prevText + text.charAt(i));
+        i++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, speed);
+
+    return () => {
+      clearInterval(typingInterval);
+    };
+  }, [text, speed]);
+
   return (
-    <Text className={`${classes.line1} ${classes.animTypewriter}`}>
-      Animation typewriter style using css steps
-    </Text>
+    <Stack>
+      <Text>{displayText}</Text>
+    </Stack>
   );
 }
