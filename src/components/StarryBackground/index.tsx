@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import classes from "./StarryBackground.module.css";
 import { StarsGroupProps } from "@/types/component";
