@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import classes from "./StarryBackground.module.css";
 import { StarsGroupProps } from "@/types/component";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
+import { useNotes } from "@/context/NotesProvider";
 
 const generateRandomStars = (
   screenWidth: number,
@@ -23,16 +24,23 @@ const generateRandomStars = (
 
 function StarsGroup({
   screenWidth,
-  color,
-  density,
+  // color,
+  // density,
   speed,
   delay,
 }: StarsGroupProps) {
+  const color = "#fff";
+  const { notes } = useNotes();
   const [boxShadow, setBoxShadow] = useState("");
 
   useEffect(() => {
-    setBoxShadow(generateRandomStars(screenWidth, color, density));
-  }, [screenWidth, color, density]);
+    const newStars = generateRandomStars(screenWidth, color, 2);
+    if (notes.length > 2) {
+      setBoxShadow((prevBoxShadow) => `${prevBoxShadow}, ${newStars}`);
+    } else {
+      setBoxShadow(generateRandomStars(screenWidth, color, 2));
+    }
+  }, [screenWidth, color, notes]);
 
   return (
     <div
@@ -49,7 +57,7 @@ function StarsGroup({
 export default function StarryBackground() {
   const { width } = useWindowDimensions();
   const color = "#fff";
-  const density = 200;
+  const density = 20;
   const speed = 1;
 
   const delays = [0, 0.1, 0.2, 0.3, 0.4, 0.5];
@@ -60,15 +68,15 @@ export default function StarryBackground() {
         background: "inherit",
         position: "relative",
         width: "100%",
-        top: "-100px",
+        top: "-70px",
       }}
     >
       {delays.map((delay, index) => (
         <StarsGroup
           key={index}
           screenWidth={width}
-          color={color}
-          density={density}
+          // color={color}
+          // density={notes.length}
           speed={speed}
           delay={delay}
         />
