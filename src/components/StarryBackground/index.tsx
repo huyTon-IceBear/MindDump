@@ -1,58 +1,50 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import classes from "./StarryBackground.module.css";
 import { StarsGroupProps } from "@/types/component";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
+import { useNotes } from "@/context/NotesProvider";
+import { COLOR, DELAYS, SPEED } from "@/constant/StarryBackground";
 
-const generateRandomStars = (
+const generateRandomStar = (
   screenWidth: number,
-  color: string,
-  density: number
+  screenHeight: number
 ): string => {
-  let stars = "";
-  for (let i = 0; i < density; i++) {
-    const hShadow = Math.floor(Math.random() * screenWidth);
-    const vShadow = Math.floor(Math.random() * screenWidth);
-    stars += `${hShadow}px ${vShadow}px ${color}`;
-    if (i < density - 1) {
-      stars += ", ";
-    }
-  }
-  return stars;
+  const hShadow = Math.floor(Math.random() * screenHeight);
+  const vShadow = Math.floor(Math.random() * screenWidth);
+  return `${vShadow}px ${hShadow}px ${COLOR}`;
 };
 
-function StarsGroup({
-  screenWidth,
-  color,
-  density,
-  speed,
-  delay,
-}: StarsGroupProps) {
-  const [boxShadow, setBoxShadow] = useState("");
+export default function StarryBackground() {
+  const { width, height } = useWindowDimensions();
+  const { notes } = useNotes();
+  const [stars, setStars] = useState<string[]>([]);
+
+  const generateStars = useCallback(
+    (count: number) => {
+      return Array.from({ length: count }, () =>
+        generateRandomStar(width - 50, height - 150)
+      );
+    },
+    [width, height]
+  );
 
   useEffect(() => {
-    setBoxShadow(generateRandomStars(screenWidth, color, density));
-  }, [screenWidth, color, density]);
-
-  return (
-    <div
-      className={classes.starsGroup}
-      style={{
-        boxShadow: boxShadow,
-        animationDuration: `${speed}s`,
-        animationDelay: `${delay}s`,
-      }}
-    ></div>
-  );
-}
-
-export default function StarryBackground() {
-  const { width } = useWindowDimensions();
-  const color = "#fff";
-  const density = 200;
-  const speed = 1;
-
-  const delays = [0, 0.1, 0.2, 0.3, 0.4, 0.5];
+    setStars((prevStars) => {
+      if (notes.length === 0) {
+        return [];
+      }
+      if (notes.length > prevStars.length) {
+        const newStars = generateStars(notes.length - prevStars.length);
+        return [...prevStars, ...newStars];
+      }
+      if (notes.length < prevStars.length) {
+        return prevStars.slice(0, notes.length);
+      }
+      // If notes.length === prevStars.length, regenerate all stars
+      return generateStars(notes.length);
+    });
+  }, [notes.length, generateStars]);
 
   return (
     <div
@@ -60,18 +52,18 @@ export default function StarryBackground() {
         background: "inherit",
         position: "relative",
         width: "100%",
-        top: "-100px",
       }}
     >
-      {delays.map((delay, index) => (
-        <StarsGroup
+      {stars.map((star, index) => (
+        <div
           key={index}
-          screenWidth={width}
-          color={color}
-          density={density}
-          speed={speed}
-          delay={delay}
-        />
+          className={classes.starsGroup}
+          style={{
+            boxShadow: star,
+            animationDuration: `${SPEED}s`,
+            animationDelay: `${DELAYS[index % DELAYS.length]}s`,
+          }}
+        ></div>
       ))}
     </div>
   );
