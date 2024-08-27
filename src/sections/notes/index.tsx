@@ -35,8 +35,8 @@ export default function NoteView() {
         <Stack w={400}>
           <CustomInput />
         </Stack>
-        {/* <NoteBoard /> */}
       </Stack>
+      <NoteBoard />
     </Container>
   );
 }
