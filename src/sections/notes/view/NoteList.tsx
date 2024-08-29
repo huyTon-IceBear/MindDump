@@ -8,7 +8,7 @@ export default function NoteBoard() {
   const { notes } = useNotes();
 
   const notesList = notes.map((note) => (
-    <Accordion.Item key={note.id} value={truncateText(note.text, 50)}>
+    <Accordion.Item key={note.id} value={note.id}>
       <Accordion.Control>{truncateText(note.text, 20)}</Accordion.Control>
       <Accordion.Panel>{note.text}</Accordion.Panel>
     </Accordion.Item>
