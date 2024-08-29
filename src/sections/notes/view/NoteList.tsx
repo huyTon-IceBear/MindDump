@@ -1,8 +1,8 @@
 import { useNotes } from "@/context/NotesProvider";
 import { truncateText } from "@/utils";
 import { Accordion, Box, Text, rem, ScrollArea } from "@mantine/core";
-import classes from "./Noteboard.module.css";
 import { IconList } from "@tabler/icons-react";
+import classes from "./NoteList.module.css";
 
 export default function NoteBoard() {
   const { notes } = useNotes();
@@ -16,7 +16,7 @@ export default function NoteBoard() {
 
   return (
     <Box className={classes.notes}>
-      <ScrollArea type="never" offsetScrollbars={false}>
+      <ScrollArea type="never" h={350} offsetScrollbars={false}>
         <div className={classes.inner}>
           <div className={classes.header}>
             <IconList

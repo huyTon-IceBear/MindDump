@@ -1,12 +1,12 @@
 "use client";
 import CustomInput from "@/components/CustomInput";
-import { Button, Container, Stack, Transition } from "@mantine/core";
-import NoteBoard from "./view/noteboard";
+import { Container, Stack } from "@mantine/core";
 import StarryBackground from "@/components/StarryBackground";
 import TypeWriter from "@/components/TypeWriter";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { AppIntro } from "@/constant/text";
 import { useLocalStorage } from "@mantine/hooks";
+import Note from "./view/Note";
 
 export default function NoteView() {
   const [hasRenderIntro, setHasRenderIntro] = useLocalStorage({
@@ -29,14 +29,12 @@ export default function NoteView() {
         gap="md"
       >
         <StarryBackground />
-
-        {!hasRenderIntro && <TypeWriter text={AppIntro.line1} speed={50} />}
-
         <Stack w={400}>
+          {!hasRenderIntro && <TypeWriter text={AppIntro.line1} speed={50} />}
           <CustomInput />
         </Stack>
       </Stack>
-      <NoteBoard />
+      <Note />
     </Container>
   );
 }
