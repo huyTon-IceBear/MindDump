@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Flex, AppShell } from "@mantine/core";
+import { AppShell } from "@mantine/core";
 import Header from "./header";
 import classes from "./layout.module.css";
 import { LayoutProps } from "@/types/layout";

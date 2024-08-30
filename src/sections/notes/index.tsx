@@ -22,12 +22,7 @@ export default function NoteView() {
 
   return (
     <Container fluid>
-      <Stack
-        bg="var(--mantine-color-body)"
-        align="center"
-        justify="center"
-        gap="md"
-      >
+      <Stack align="center" justify="center" gap="md">
         <StarryBackground />
         <Stack w={400}>
           {!hasRenderIntro && <TypeWriter text={AppIntro.line1} speed={50} />}
