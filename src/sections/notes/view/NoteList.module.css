@@ -5,7 +5,7 @@
     background-color: var(--mantine-color-white);
   }
   @mixin dark {
-    background-color: var(--mantine-color-dark-8);
+    background-color: var(--mantine-color-dark-7);
   }
 }
 
@@ -23,7 +23,7 @@
   position: sticky;
   display: flex;
   align-items: center;
-  background-color: var(--mantine-color-dark-8);
+  background-color: var(--mantine-color-dark-7);
   padding-top: var(--mantine-spacing-md);
   padding-bottom: var(--mantine-spacing-md);
 
@@ -32,6 +32,6 @@
   }
 
   @mixin dark {
-    background-color: var(--mantine-color-dark-8);
+    background-color: var(--mantine-color-dark-7);
   }
 }
