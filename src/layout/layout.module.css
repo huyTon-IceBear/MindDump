@@ -2,13 +2,31 @@
   --footer-height: 120px;
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 100;
+  background-color: light-dark(
+    var(--mantine-color-white),
+    var(--mantine-color-dark-7)
+  );
+  border-bottom: rem(1px) solid
+    light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-8));
+}
+
 .content {
   min-height: 100vh;
   position: relative;
   padding-top: 120px;
   padding-bottom: 40px;
   z-index: 1;
-  background-color: var(--mantine-color-body);
+  background-color: light-dark(
+    var(--mantine-color-white),
+    var(--mantine-color-dark-8)
+  );
   box-shadow: var(--mantine-shadow-md);
   @mixin light {
     --docs-home-page-gradient-text: linear-gradient(

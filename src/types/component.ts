@@ -19,7 +19,8 @@ export interface StarsGroupProps {
     delay: number;
 };
 
-export interface TypeWriterProps{
-    text: string;
-    speed: number;
-}
+export interface TypeWriterProps {
+  text: string | string[];
+  speed: number;
+  onComplete?: () => void;
+};
