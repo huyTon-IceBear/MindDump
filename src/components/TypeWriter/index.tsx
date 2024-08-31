@@ -6,12 +6,20 @@ export default function TypeWriter({
   text,
   speed,
   onComplete,
+  skip,
 }: TypeWriterProps) {
   const [displayText, setDisplayText] = useState<string[]>([]);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
 
   useEffect(() => {
+    if (skip) {
+      const lines = Array.isArray(text) ? text : [text];
+      setDisplayText(lines);
+      onComplete && onComplete();
+      return;
+    }
+
     const lines = Array.isArray(text) ? text : [text];
 
     const typingInterval = setInterval(() => {
@@ -36,7 +44,7 @@ export default function TypeWriter({
     }, speed);
 
     return () => clearInterval(typingInterval);
-  }, [text, speed, currentLineIndex, currentCharIndex, onComplete]);
+  }, [text, speed, currentLineIndex, currentCharIndex, onComplete, skip]);
 
   return (
     <Stack>

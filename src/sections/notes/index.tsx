@@ -3,24 +3,39 @@ import CustomInput from "@/components/CustomInput";
 import { Button, Container, Stack, Transition } from "@mantine/core";
 import StarryBackground from "@/components/StarryBackground";
 import TypeWriter from "@/components/TypeWriter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { AppIntro } from "@/constant/text";
 import Note from "./view/Note";
 
 export default function NoteView() {
   const [showTypeWriter, setShowTypeWriter] = useState(true);
   const [typewriterComplete, setTypewriterComplete] = useState(false);
+  const [skipTypewriter, setSkipTypewriter] = useState(false);
 
-  const handleSkip = () => {
+  const handleSkip = useCallback(() => {
     setShowTypeWriter(false);
-  };
+  }, []);
 
-  const handleTypewriterComplete = () => {
+  const handleTypewriterComplete = useCallback(() => {
     setTypewriterComplete(true);
-  };
+  }, []);
+
+  const handlePageClick = useCallback(() => {
+    if (showTypeWriter && !typewriterComplete) {
+      setSkipTypewriter(true);
+      setTypewriterComplete(true);
+    }
+  }, [showTypeWriter, typewriterComplete]);
+
+  useEffect(() => {
+    document.addEventListener("click", handlePageClick);
+    return () => {
+      document.removeEventListener("click", handlePageClick);
+    };
+  }, [handlePageClick]);
 
   return (
-    <Container fluid>
+    <Container fluid onClick={handlePageClick}>
       <Stack align="center" justify="center" gap="md">
         <StarryBackground />
         <Stack w={600}>
@@ -38,6 +53,7 @@ export default function NoteView() {
                       text={[AppIntro.line1, AppIntro.line2]}
                       speed={50}
                       onComplete={handleTypewriterComplete}
+                      skip={skipTypewriter}
                     />
                     <Transition
                       mounted={typewriterComplete}

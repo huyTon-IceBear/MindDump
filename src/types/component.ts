@@ -21,4 +21,5 @@ export interface TypeWriterProps {
   text: string | string[];
   speed: number;
   onComplete?: () => void;
+  skip?: boolean;
 };
