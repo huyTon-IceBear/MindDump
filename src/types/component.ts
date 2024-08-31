@@ -13,8 +13,6 @@ export interface LogoProps {
   
 export interface StarsGroupProps {
     screenWidth: number;
-    // color: string;
-    // density: number;
     speed: number;
     delay: number;
 };
