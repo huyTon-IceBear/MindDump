@@ -12,6 +12,7 @@
 .dropdown {
   border: none;
   min-width: 20%;
+  padding-top: var(--mantine-spacing-xs);
 
   @mixin light {
     background-color: var(--mantine-color-white);

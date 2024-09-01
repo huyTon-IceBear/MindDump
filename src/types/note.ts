@@ -8,6 +8,7 @@ export enum ActionTypes {
     ADD_NOTE = "ADD_NOTE",
     CHANGE_NOTE = "CHANGE_NOTE",
     DELETE_NOTE = "DELETE_NOTE",
+    REMOVE_NOTES = "REMOVE_NOTES",
 }
 
 // Define type for each action type to enforce type safety
@@ -16,17 +17,22 @@ export type AddNoteAction = {
     text: string;
 };
   
-  export type ChangeNoteAction = {
+export type ChangeNoteAction = {
     type: ActionTypes.CHANGE_NOTE;
     note: Note;
 };
   
-  export type DeleteNoteAction = {
+export type DeleteNoteAction = {
     type: ActionTypes.DELETE_NOTE;
     id: string;
+};
+
+export type RemoveNotesAction = {
+  type: ActionTypes.REMOVE_NOTES;
 };
 
 export type NoteAction = 
 | AddNoteAction
 | ChangeNoteAction
 | DeleteNoteAction
+| RemoveNotesAction

@@ -65,6 +65,9 @@ function notesReducer(notes: Note[], action: NoteAction): Note[] {
     case ActionTypes.DELETE_NOTE: {
       return notes.filter((n) => n.id !== action.id);
     }
+    case ActionTypes.REMOVE_NOTES: {
+      return [];
+    }
     default: {
       throw Error("Unknown action type!");
     }

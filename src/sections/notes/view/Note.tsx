@@ -30,6 +30,7 @@ export default function Note() {
             inline
             color="red"
             withBorder
+            processing
             disabled={!showIndicator}
             position="top-end"
             offset={4}
