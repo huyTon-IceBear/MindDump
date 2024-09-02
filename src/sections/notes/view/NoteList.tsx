@@ -8,21 +8,64 @@ import {
   ScrollArea,
   Flex,
   ActionIcon,
+  Center,
+  AccordionControlProps,
+  useCombobox,
+  Combobox,
+  Button,
 } from "@mantine/core";
-import { IconList, IconTrash } from "@tabler/icons-react";
+import { IconList, IconTrash, IconDots } from "@tabler/icons-react";
 import classes from "./NoteList.module.css";
 import { ActionTypes } from "@/types/note";
+
+const noteOptions = ["Edit", "Remove", "View", "Copy"];
 
 export default function NoteBoard() {
   const { notes } = useNotes();
   const dispatch = useNotesDispatch();
+  const combobox = useCombobox({
+    onDropdownClose: () => combobox.resetSelectedOption(),
+  });
+
+  const options = noteOptions.map((item) => (
+    <Combobox.Option value={item} key={item}>
+      {item}
+    </Combobox.Option>
+  ));
 
   const notesList = notes.map((note) => (
     <Accordion.Item key={note.id} value={note.id}>
-      <Accordion.Control>{truncateText(note.text, 20)}</Accordion.Control>
+      <AccordionControl>{truncateText(note.text, 20)}</AccordionControl>
       <Accordion.Panel>{note.text}</Accordion.Panel>
     </Accordion.Item>
   ));
+
+  function AccordionControl(props: AccordionControlProps) {
+    return (
+      <Center>
+        <Accordion.Control {...props} />
+        <ActionIcon size="lg" variant="subtle" color="gray">
+          <Combobox
+            store={combobox}
+            width={100}
+            position="bottom-end"
+            withArrow
+            onOptionSubmit={(val) => {
+              combobox.closeDropdown();
+            }}
+          >
+            <Combobox.Target>
+              <IconDots size="1rem" onClick={() => combobox.toggleDropdown()} />
+            </Combobox.Target>
+
+            <Combobox.Dropdown>
+              <Combobox.Options>{options}</Combobox.Options>
+            </Combobox.Dropdown>
+          </Combobox>
+        </ActionIcon>
+      </Center>
+    );
+  }
 
   return (
     <Box className={classes.notes}>
@@ -50,7 +93,7 @@ export default function NoteBoard() {
             </ActionIcon>
           </div>
           <div className={classes.body}>
-            <Accordion>{notesList}</Accordion>
+            <Accordion chevronPosition="left">{notesList}</Accordion>
           </div>
         </div>
       </ScrollArea>
