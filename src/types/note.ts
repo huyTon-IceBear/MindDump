@@ -36,3 +36,12 @@ export type NoteAction =
 | ChangeNoteAction
 | DeleteNoteAction
 | RemoveNotesAction
+
+export enum ActionOptions {
+    Edit = "Edit",
+    Remove = "Remove",
+    View = "View",
+    Copy = "Copy"
+}
+
+export const NoteActionOptions: string[] =  Object.values(ActionOptions);

@@ -16,9 +16,12 @@ import {
 } from "@mantine/core";
 import { IconList, IconTrash, IconDots } from "@tabler/icons-react";
 import classes from "./NoteList.module.css";
-import { ActionTypes } from "@/types/note";
-
-const noteOptions = ["Edit", "Remove", "View", "Copy"];
+import {
+  ActionOptions,
+  ActionTypes,
+  Note,
+  NoteActionOptions,
+} from "@/types/note";
 
 export default function NoteBoard() {
   const { notes } = useNotes();
@@ -27,7 +30,7 @@ export default function NoteBoard() {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const options = noteOptions.map((item) => (
+  const options = NoteActionOptions.map((item) => (
     <Combobox.Option value={item} key={item}>
       {item}
     </Combobox.Option>
@@ -35,12 +38,31 @@ export default function NoteBoard() {
 
   const notesList = notes.map((note) => (
     <Accordion.Item key={note.id} value={note.id}>
-      <AccordionControl>{truncateText(note.text, 20)}</AccordionControl>
+      <AccordionControl note={note}>
+        {truncateText(note.text, 20)}
+      </AccordionControl>
       <Accordion.Panel>{note.text}</Accordion.Panel>
     </Accordion.Item>
   ));
 
-  function AccordionControl(props: AccordionControlProps) {
+  const handleSelectOption = (option: string, note: Note) => {
+    switch (option) {
+      case ActionOptions.View:
+        console.log("view");
+        break;
+      case ActionOptions.Copy:
+        console.log("copy");
+        break;
+      case ActionOptions.Edit:
+        console.log("edit");
+        break;
+      case ActionOptions.Remove:
+        console.log("remove");
+        break;
+    }
+  };
+
+  function AccordionControl(props: { note: Note } & AccordionControlProps) {
     return (
       <Center>
         <Accordion.Control {...props} />
@@ -51,6 +73,7 @@ export default function NoteBoard() {
             position="bottom-end"
             withArrow
             onOptionSubmit={(val) => {
+              handleSelectOption(val, props.note);
               combobox.closeDropdown();
             }}
           >
