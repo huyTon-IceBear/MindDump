@@ -81,11 +81,6 @@ export function useNotesDispatch() {
 function notesReducer(notes: Note[], action: NoteAction): Note[] {
   switch (action.type) {
     case ActionTypes.ADD_NOTE: {
-      notifications.show({
-        position: "top-right",
-        title: NotificationMessages.ADD_NOTE.title,
-        message: NotificationMessages.ADD_NOTE.message,
-      });
       return [
         ...notes,
         {
@@ -95,11 +90,6 @@ function notesReducer(notes: Note[], action: NoteAction): Note[] {
       ];
     }
     case ActionTypes.CHANGE_NOTE: {
-      notifications.show({
-        position: "top-right",
-        title: NotificationMessages.CHANGE_NOTE.title,
-        message: NotificationMessages.CHANGE_NOTE.message,
-      });
       return notes.map((n) => {
         if (n.id === action.note.id) {
           return action.note;
@@ -109,19 +99,9 @@ function notesReducer(notes: Note[], action: NoteAction): Note[] {
       });
     }
     case ActionTypes.DELETE_NOTE: {
-      notifications.show({
-        position: "top-right",
-        title: NotificationMessages.DELETE_NOTE.title,
-        message: NotificationMessages.DELETE_NOTE.message,
-      });
       return notes.filter((n) => n.id !== action.id);
     }
     case ActionTypes.REMOVE_NOTES: {
-      notifications.show({
-        position: "top-right",
-        title: NotificationMessages.REMOVE_NOTES.title,
-        message: NotificationMessages.REMOVE_NOTES.message,
-      });
       return [];
     }
     default: {

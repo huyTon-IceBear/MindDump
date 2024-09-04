@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { Note } from "@/types/note";
 import { useNotesDispatch } from "@/context/NotesProvider";
 import { ActionTypes } from "@/types/note";
+import { notifications } from "@mantine/notifications";
+import { NotificationMessages } from "@/constant/notification";
 
 interface NoteModalProps {
   opened: boolean;
@@ -29,6 +31,11 @@ export default function NoteModal({ opened, onClose, note }: NoteModalProps) {
           ...note,
           text: editedText,
         },
+      });
+      notifications.show({
+        position: "top-right",
+        title: NotificationMessages.CHANGE_NOTE.title,
+        message: NotificationMessages.CHANGE_NOTE.message,
       });
     }
     setEditMode(false);
