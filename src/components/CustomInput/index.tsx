@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Textarea } from "@mantine/core";
 import { useNotesDispatch } from "@/context/NotesProvider";
 import { ActionTypes } from "@/types/note";
+import { notifications } from "@mantine/notifications";
+import { NotificationMessages } from "@/constant/notification";
 
 export default function CustomInput() {
   const [value, setValue] = useState("");
@@ -15,6 +17,11 @@ export default function CustomInput() {
       // Check if the input value is not empty
       if (value.trim() !== "") {
         dispatch({ type: ActionTypes.ADD_NOTE, text: value });
+        notifications.show({
+          position: "top-right",
+          title: NotificationMessages.ADD_NOTE.title,
+          message: NotificationMessages.ADD_NOTE.message,
+        });
         setValue(""); // Clear the input after dispatching the action
       }
     }

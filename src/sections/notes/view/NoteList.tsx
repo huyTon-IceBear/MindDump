@@ -4,6 +4,8 @@ import { IconList, IconTrash } from "@tabler/icons-react";
 import classes from "./NoteList.module.css";
 import { ActionTypes } from "@/types/note";
 import NoteAccordion from "./NoteAccordion";
+import { notifications } from "@mantine/notifications";
+import { NotificationMessages } from "@/constant/notification";
 
 export default function NoteBoard() {
   const dispatch = useNotesDispatch();
@@ -25,6 +27,11 @@ export default function NoteBoard() {
               aria-label="Delete Notes"
               onClick={() => {
                 dispatch({ type: ActionTypes.REMOVE_NOTES });
+                notifications.show({
+                  position: "top-right",
+                  title: NotificationMessages.DELETE_NOTE.title,
+                  message: NotificationMessages.DELETE_NOTE.message,
+                });
               }}
             >
               <IconTrash

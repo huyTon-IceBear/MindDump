@@ -41,6 +41,11 @@ function AccordionControl({
         break;
       case ActionOptions.Remove:
         dispatch({ type: ActionTypes.DELETE_NOTE, id: note.id });
+        notifications.show({
+          position: "top-right",
+          title: NotificationMessages.DELETE_NOTE.title,
+          message: NotificationMessages.DELETE_NOTE.message,
+        });
         break;
     }
   };
