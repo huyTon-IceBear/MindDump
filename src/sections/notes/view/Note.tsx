@@ -23,6 +23,7 @@ export default function Note() {
       onClose={() => setOpened(false)}
       position="top-end"
       offset={{ mainAxis: 7, crossAxis: 0 }}
+      closeOnClickOutside={false}
     >
       <Popover.Target>
         <div className={classes.buttonWrapper}>
@@ -30,6 +31,7 @@ export default function Note() {
             inline
             color="red"
             withBorder
+            processing
             disabled={!showIndicator}
             position="top-end"
             offset={4}

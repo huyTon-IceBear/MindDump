@@ -18,7 +18,7 @@ export default function ColorSchemeToggle() {
       onClick={() =>
         setColorScheme(computedColorScheme === "light" ? "dark" : "light")
       }
-      variant="default"
+      variant="transparent"
       size="lg"
       aria-label="Toggle color scheme"
     >

@@ -4,7 +4,8 @@ import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import DefaultLayout from "@/layout/layout";
 import { NotesProvider } from "@/context/NotesProvider";
-
+import "@mantine/notifications/styles.css";
+import { Notifications } from "@mantine/notifications";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <MantineProvider>
+          <Notifications />
           <DefaultLayout>
             <NotesProvider>{children}</NotesProvider>
           </DefaultLayout>
