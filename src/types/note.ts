@@ -28,7 +28,7 @@ export type DeleteNoteAction = {
 };
 
 export type RemoveNotesAction = {
-  type: ActionTypes.REMOVE_NOTES;
+    type: ActionTypes.REMOVE_NOTES;
 };
 
 export type NoteAction = 
