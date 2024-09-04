@@ -5,10 +5,24 @@ import { ActionTypes, Note, NoteAction } from "@/types/note";
 import { nanoid } from "nanoid";
 import { createContext, useContext, useReducer } from "react";
 
+/**
+ * Context for storing the notes state.
+ */
 export const NotesContext = createContext<NoteContextType | null>(null);
+
+/**
+ * Context for storing the dispatch function to update notes.
+ */
 export const NotesDispatchContext =
   createContext<React.Dispatch<NoteAction> | null>(null);
 
+/**
+ * Provider component for the Notes context.
+ *
+ * @param {ContextProviderProps} props - The props for the provider.
+ * @param {React.ReactNode} props.children - The child components to be wrapped by the provider.
+ * @returns {JSX.Element} The provider component.
+ */
 export function NotesProvider({ children }: ContextProviderProps) {
   const [notes, dispatch] = useReducer(notesReducer, []);
   return (
@@ -20,6 +34,12 @@ export function NotesProvider({ children }: ContextProviderProps) {
   );
 }
 
+/**
+ * Custom hook to access the notes state from the NotesContext.
+ *
+ * @returns {NoteContextType} The notes context value.
+ * @throws {Error} If used outside of a NotesProvider.
+ */
 export function useNotes() {
   const context = useContext(NotesContext);
 
@@ -30,6 +50,12 @@ export function useNotes() {
   return context;
 }
 
+/**
+ * Custom hook to access the dispatch function from the NotesDispatchContext.
+ *
+ * @returns {React.Dispatch<NoteAction>} The dispatch function for updating notes.
+ * @throws {Error} If used outside of a NotesDispatchContextProvider.
+ */
 export function useNotesDispatch() {
   const dispatch = useContext(NotesDispatchContext);
 
@@ -42,6 +68,14 @@ export function useNotesDispatch() {
   return dispatch;
 }
 
+/**
+ * Reducer function for managing the notes state.
+ *
+ * @param {Note[]} notes - The current state of notes.
+ * @param {NoteAction} action - The action to be performed on the notes.
+ * @returns {Note[]} The new state of notes after applying the action.
+ * @throws {Error} If an unknown action type is provided.
+ */
 function notesReducer(notes: Note[], action: NoteAction): Note[] {
   switch (action.type) {
     case ActionTypes.ADD_NOTE: {
