@@ -12,6 +12,8 @@ import { useClipboard, useDisclosure } from "@mantine/hooks";
 import { IconDots, IconEye, IconTrash, IconCopy } from "@tabler/icons-react";
 import NoteModal from "./NoteModal";
 import { useState } from "react";
+import { notifications } from "@mantine/notifications";
+import { NotificationMessages } from "@/constant/notification";
 
 function AccordionControl({
   note,
@@ -31,6 +33,11 @@ function AccordionControl({
         break;
       case ActionOptions.Copy:
         clipboard.copy(note.text);
+        notifications.show({
+          position: "top-right",
+          title: NotificationMessages.COPY_NOTE.title,
+          message: NotificationMessages.COPY_NOTE.message,
+        });
         break;
       case ActionOptions.Remove:
         dispatch({ type: ActionTypes.DELETE_NOTE, id: note.id });

@@ -15,10 +15,11 @@
     }
   },
   "dependencies": {
-    "@mantine/carousel": "^7.12.0",
-    "@mantine/core": "^7.12.0",
-    "@mantine/dropzone": "^7.12.0",
-    "@mantine/hooks": "^7.12.0",
+    "@mantine/carousel": "^7.12.2",
+    "@mantine/core": "^7.12.2",
+    "@mantine/dropzone": "^7.12.2",
+    "@mantine/hooks": "^7.12.2",
+    "@mantine/notifications": "^7.12.2",
     "@tabler/icons-react": "^3.12.0",
     "embla-carousel-react": "^8.1.8",
     "nanoid": "^5.0.7",
