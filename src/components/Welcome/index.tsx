@@ -1,24 +1,24 @@
 import { Title, Text } from "@mantine/core";
 import classes from "./Welcome.module.css";
+import { WelcomeText } from "@/constant/text";
 
 export default function WelcomeComponent() {
   return (
     <div>
       <Title className={classes.title}>
-        A{" "}
+        {WelcomeText.titleStart}{" "}
         <Text
           inherit
           variant="gradient"
           component="span"
           gradient={{ from: "blue", to: "green", deg: 90 }}
         >
-          web tool
+          {WelcomeText.titleHighlight}
         </Text>{" "}
-        for capturing thoughts
+        {WelcomeText.titleEnd}
       </Title>
       <Text size="lg" mt="xl" className={classes.description}>
-        Start by jotting down your ideas and inspirations, and let MindDump help
-        you manage and enhance your mental workflow.
+        {WelcomeText.description}
       </Text>
     </div>
   );
