@@ -36,6 +36,7 @@ export default function NoteModal({ opened, onClose, note }: NoteModalProps) {
         position: "top-right",
         title: NotificationMessages.CHANGE_NOTE.title,
         message: NotificationMessages.CHANGE_NOTE.message,
+        autoClose: 1500,
       });
     }
     setEditMode(false);

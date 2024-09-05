@@ -21,6 +21,7 @@ export default function CustomInput() {
           position: "top-right",
           title: NotificationMessages.ADD_NOTE.title,
           message: NotificationMessages.ADD_NOTE.message,
+          autoClose: 1500,
         });
         setValue(""); // Clear the input after dispatching the action
       }

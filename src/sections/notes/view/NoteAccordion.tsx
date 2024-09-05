@@ -37,6 +37,7 @@ function AccordionControl({
           position: "top-right",
           title: NotificationMessages.COPY_NOTE.title,
           message: NotificationMessages.COPY_NOTE.message,
+          autoClose: 1500,
         });
         break;
       case ActionOptions.Remove:
@@ -45,6 +46,7 @@ function AccordionControl({
           position: "top-right",
           title: NotificationMessages.DELETE_NOTE.title,
           message: NotificationMessages.DELETE_NOTE.message,
+          autoClose: 1500,
         });
         break;
     }
