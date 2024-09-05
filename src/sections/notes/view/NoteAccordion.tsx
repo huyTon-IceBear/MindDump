@@ -56,7 +56,12 @@ function AccordionControl({
     <>
       <Center>
         <Accordion.Control {...props} onClick={(e) => e.stopPropagation()} />
-        <Menu shadow="md" width={100} position="bottom-end">
+        <Menu
+          shadow="md"
+          width={100}
+          position="bottom-end"
+          withinPortal={false}
+        >
           <Menu.Target>
             <ActionIcon size="lg" variant="subtle" color="gray">
               <IconDots size="1rem" />

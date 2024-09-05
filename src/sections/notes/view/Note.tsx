@@ -4,6 +4,7 @@ import NoteBoard from "./NoteList";
 import { useEffect, useState } from "react";
 import classes from "./Note.module.css";
 import { useNotes } from "@/context/NotesProvider";
+import EmptyNote from "./EmptyNote";
 
 export default function Note() {
   const [opened, setOpened] = useState(false);
@@ -53,7 +54,7 @@ export default function Note() {
         </div>
       </Popover.Target>
       <Popover.Dropdown className={classes.dropdown}>
-        <NoteBoard />
+        {notes.length === 0 ? <EmptyNote /> : <NoteBoard />}
       </Popover.Dropdown>
     </Popover>
   );

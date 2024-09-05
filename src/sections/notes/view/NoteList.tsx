@@ -41,9 +41,7 @@ export default function NoteBoard() {
               />
             </ActionIcon>
           </div>
-          <div className={classes.body}>
-            <NoteAccordion />
-          </div>
+          <NoteAccordion />
         </div>
       </ScrollArea>
     </Box>
