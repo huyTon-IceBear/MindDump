@@ -1,4 +1,4 @@
-import { useNotesDispatch } from "@/context/NotesProvider";
+import { useNotes, useNotesDispatch } from "@/context/NotesProvider";
 import { Box, Text, rem, ScrollArea, Flex, ActionIcon } from "@mantine/core";
 import { IconList, IconTrash } from "@tabler/icons-react";
 import classes from "./NoteList.module.css";
@@ -6,9 +6,11 @@ import { ActionTypes } from "@/types/note";
 import NoteAccordion from "./NoteAccordion";
 import { notifications } from "@mantine/notifications";
 import { NotificationMessages } from "@/constant/notification";
+import EmptyNote from "./EmptyNote";
 
 export default function NoteBoard() {
   const dispatch = useNotesDispatch();
+  const { notes } = useNotes();
 
   return (
     <Box className={classes.notes}>
@@ -41,9 +43,7 @@ export default function NoteBoard() {
               />
             </ActionIcon>
           </div>
-          <div className={classes.body}>
-            <NoteAccordion />
-          </div>
+          {notes.length === 0 ? <EmptyNote /> : <NoteAccordion />}
         </div>
       </ScrollArea>
     </Box>

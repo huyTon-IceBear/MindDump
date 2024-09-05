@@ -23,3 +23,8 @@ export interface TypeWriterProps {
   onComplete?: () => void;
   skip?: boolean;
 };
+
+export interface EmptyNoteProps {
+  description?: string;
+  icon?: React.ReactNode;
+}
