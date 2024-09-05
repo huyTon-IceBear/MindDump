@@ -31,6 +31,7 @@ export default function NoteBoard() {
                   position: "top-right",
                   title: NotificationMessages.DELETE_NOTE.title,
                   message: NotificationMessages.DELETE_NOTE.message,
+                  autoClose: 1500,
                 });
               }}
             >
