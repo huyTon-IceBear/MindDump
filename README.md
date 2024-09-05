@@ -12,15 +12,15 @@ MindDump is a web application designed to help users manage and visualize their 
 - Different layouts to display thoughts (grid, carousel, card layouts).
 - Animated transitions for displaying thoughts.
 
-### Phase 3: AI-Assisted Thought Combination and Analysis
-- AI-powered analysis to summarize and categorize thoughts.
-- Image analysis to tag and categorize images.
-- Generate combined insights from user inputs.
-
-### Phase 4: Backend and Database
+### Phase 3: Backend and Database
 - User authentication for account creation and login.
 - Persistent storage of thoughts in a database.
 - API endpoints for submitting, retrieving, and managing thoughts.
+  
+### Phase 4: AI-Assisted Thought Combination and Analysis
+- AI-powered analysis to summarize and categorize thoughts.
+- Image analysis to tag and categorize images.
+- Generate combined insights from user inputs.
 
 ### Phase 5: Advanced Features for Managing Thoughts
 - Tagging system for categorizing thoughts.
