@@ -29,8 +29,8 @@ export default function NoteBoard() {
                 dispatch({ type: ActionTypes.REMOVE_NOTES });
                 notifications.show({
                   position: "top-right",
-                  title: NotificationMessages.DELETE_NOTE.title,
-                  message: NotificationMessages.DELETE_NOTE.message,
+                  title: NotificationMessages.REMOVE_NOTES.title,
+                  message: NotificationMessages.REMOVE_NOTES.message,
                   autoClose: 1500,
                 });
               }}
