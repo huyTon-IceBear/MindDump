@@ -25,12 +25,13 @@ export default function NoteModal({ opened, onClose, note }: NoteModalProps) {
 
   const handleSave = () => {
     if (note) {
+      const updatedNote = {
+        ...note,
+        text: editedText,
+      };
       dispatch({
         type: ActionTypes.CHANGE_NOTE,
-        note: {
-          ...note,
-          text: editedText,
-        },
+        note: updatedNote,
       });
       notifications.show({
         position: "top-right",
@@ -38,6 +39,8 @@ export default function NoteModal({ opened, onClose, note }: NoteModalProps) {
         message: NotificationMessages.CHANGE_NOTE.message,
         autoClose: 1500,
       });
+      // Update the local state with the new text
+      setEditedText(updatedNote.text);
     }
     setEditMode(false);
   };
@@ -56,7 +59,7 @@ export default function NoteModal({ opened, onClose, note }: NoteModalProps) {
           </>
         ) : (
           <>
-            <Text>{note?.text}</Text>
+            <Text>{editedText}</Text>
             <Button onClick={() => setEditMode(true)}>Edit</Button>
           </>
         )}
