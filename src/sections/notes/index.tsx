@@ -6,11 +6,19 @@ import TypeWriter from "@/components/TypeWriter";
 import { useState, useEffect, useCallback } from "react";
 import { AppIntro } from "@/constant/text";
 import Note from "./view/Note";
+import { useNotes } from "@/context/NotesProvider";
 
 export default function NoteView() {
   const [showTypeWriter, setShowTypeWriter] = useState(true);
   const [typewriterComplete, setTypewriterComplete] = useState(false);
   const [skipTypewriter, setSkipTypewriter] = useState(false);
+  const { notes } = useNotes();
+
+  useEffect(() => {
+    if (notes.length > 0) {
+      setShowTypeWriter(false);
+    }
+  }, [notes]);
 
   const handleSkip = useCallback(() => {
     setShowTypeWriter(false);
