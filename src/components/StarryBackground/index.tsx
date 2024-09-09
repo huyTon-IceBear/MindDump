@@ -1,9 +1,9 @@
 "use client";
+import { COLOR, DELAYS, SPEED } from "@/constant/StarryBackground";
+import { useNotes } from "@/context/NotesProvider";
+import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { useCallback, useEffect, useState } from "react";
 import classes from "./StarryBackground.module.css";
-import useWindowDimensions from "@/hooks/useWindowDimensions";
-import { useNotes } from "@/context/NotesProvider";
-import { COLOR, DELAYS, SPEED } from "@/constant/StarryBackground";
 
 /**
  * StarryBackground component

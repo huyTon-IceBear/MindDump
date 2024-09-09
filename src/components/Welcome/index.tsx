@@ -1,6 +1,6 @@
-import { Title, Text } from "@mantine/core";
-import classes from "./Welcome.module.css";
 import { WelcomeText } from "@/constant/text";
+import { Text, Title } from "@mantine/core";
+import classes from "./Welcome.module.css";
 
 export default function WelcomeComponent() {
   return (

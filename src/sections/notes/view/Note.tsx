@@ -1,10 +1,10 @@
-import { Popover, ActionIcon, Indicator } from "@mantine/core";
-import { IconNotes } from "@tabler/icons-react";
-import NoteBoard from "./NoteList";
-import { useEffect, useState } from "react";
-import classes from "./Note.module.css";
 import { useNotes } from "@/context/NotesProvider";
+import { ActionIcon, Indicator, Popover } from "@mantine/core";
+import { IconNotes } from "@tabler/icons-react";
+import { useEffect, useState } from "react";
 import EmptyNote from "./EmptyNote";
+import classes from "./Note.module.css";
+import NoteBoard from "./NoteList";
 
 export default function Note() {
   const [opened, setOpened] = useState(false);

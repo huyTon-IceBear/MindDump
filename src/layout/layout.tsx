@@ -1,9 +1,9 @@
 "use client";
 
+import { LayoutProps } from "@/types/layout";
 import { AppShell } from "@mantine/core";
 import Header from "./header";
 import classes from "./layout.module.css";
-import { LayoutProps } from "@/types/layout";
 
 export default function DefaultLayout({ children }: LayoutProps) {
   return (

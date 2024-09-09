@@ -1,13 +1,6 @@
 import ColorSchemeToggle from "@/components/ColorSchemeToggle";
 import Logo from "@/components/Logo";
-import {
-  Group,
-  Anchor,
-  AppShell,
-  Container,
-  RemoveScroll,
-  Text,
-} from "@mantine/core";
+import { AppShell, Group, RemoveScroll } from "@mantine/core";
 import classes from "./layout.module.css";
 
 export default function Header() {
