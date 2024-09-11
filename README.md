@@ -5,33 +5,26 @@ MindDump is a web application designed to help users manage and visualize their 
 ## Features
 
 ### Phase 1: Static Web with User Input
-- Simple user interface for inputting thoughts (text and images).
-- Basic display of submitted thoughts in a list format.
+- Simple user interface for inputting thoughts.
+- Basic display of submitted thoughts in a list of notes format.
 
-### Phase 2: Multiple Display of User Thoughts with Animation Effects
-- Different layouts to display thoughts (grid, carousel, card layouts).
-- Animated transitions for displaying thoughts.
+### Phase 2: Animated display of thoughts
+- Display each note as a glowing star in the black sky.
+- Add interactivity option for each note like view details, edit, delete, etc.
+- Search functionality to find specific notes.
+- Add notes with text or images.
 
-### Phase 3: Backend and Database
+### Phase 3: Internationalization the web app
+
+### Phase 4: Backend and Database
 - User authentication for account creation and login.
 - Persistent storage of thoughts in a database.
 - API endpoints for submitting, retrieving, and managing thoughts.
   
-### Phase 4: AI-Assisted Thought Combination and Analysis
+### Phase 5: AI-Assisted Thought Combination and Analysis
 - AI-powered analysis to summarize and categorize thoughts.
 - Image analysis to tag and categorize images.
 - Generate combined insights from user inputs.
-
-### Phase 5: Advanced Features for Managing Thoughts
-- Tagging system for categorizing thoughts.
-- Search functionality to find specific thoughts.
-- Mood tracking for tagging thoughts with current mood.
-- Reminder system for important thoughts.
-
-### Phase 6: Social Features and Community Interaction
-- Sharing thoughts with privacy options.
-- Commenting on shared thoughts.
-- Community boards for public thought sharing and discussion.
 
 ## Tech Stack
 ### Frontend:
@@ -39,7 +32,6 @@ MindDump is a web application designed to help users manage and visualize their 
 - React.js
 - TypeScript
 - Mantine Library
-- Framer Motion (for animations)
 
 ### Backend:
 - GraphQL
