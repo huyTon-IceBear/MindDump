@@ -1,11 +1,11 @@
-import { useNotesDispatch } from "@/context/NotesProvider";
-import { Box, Text, rem, ScrollArea, Flex, ActionIcon } from "@mantine/core";
-import { IconList, IconTrash } from "@tabler/icons-react";
-import classes from "./NoteList.module.css";
-import { ActionTypes } from "@/types/note";
-import NoteAccordion from "./NoteAccordion";
-import { notifications } from "@mantine/notifications";
 import { NotificationMessages } from "@/constant/notification";
+import { useNotesDispatch } from "@/context/NotesProvider";
+import { ActionTypes } from "@/types/note";
+import { ActionIcon, Box, Flex, rem, ScrollArea, Text } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { IconList, IconTrash } from "@tabler/icons-react";
+import NoteAccordion from "./NoteAccordion";
+import classes from "./NoteList.module.css";
 
 export default function NoteBoard() {
   const dispatch = useNotesDispatch();

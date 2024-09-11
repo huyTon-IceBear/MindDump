@@ -4,8 +4,6 @@ import { ContextProviderProps, NoteContextType } from "@/types/context";
 import { ActionTypes, Note, NoteAction } from "@/types/note";
 import { nanoid } from "nanoid";
 import { createContext, useContext, useReducer } from "react";
-import { notifications } from "@mantine/notifications";
-import { NotificationMessages } from "@/constant/notification";
 
 /**
  * Context for storing the notes state.

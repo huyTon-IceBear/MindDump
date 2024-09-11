@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Textarea } from "@mantine/core";
+import { NotificationMessages } from "@/constant/notification";
 import { useNotesDispatch } from "@/context/NotesProvider";
 import { ActionTypes } from "@/types/note";
+import { Textarea } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { NotificationMessages } from "@/constant/notification";
+import React, { useState } from "react";
 
 export default function CustomInput() {
   const [value, setValue] = useState("");

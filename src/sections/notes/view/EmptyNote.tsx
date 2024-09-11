@@ -1,6 +1,6 @@
 import { EmptyNoteText } from "@/constant/text";
 import { EmptyNoteProps } from "@/types/component";
-import { Text, Stack } from "@mantine/core";
+import { Stack, Text } from "@mantine/core";
 import { IconBubble } from "@tabler/icons-react";
 
 export default function EmptyNote({

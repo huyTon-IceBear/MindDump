@@ -1,8 +1,8 @@
 "use client";
-import Link from "next/link";
 import CustomQuote from "@/components/CustomQuote";
 import WelcomeComponent from "@/components/Welcome";
 import { Button, Container, Group } from "@mantine/core";
+import Link from "next/link";
 import classes from "./home.module.css";
 
 export default function HomeView() {

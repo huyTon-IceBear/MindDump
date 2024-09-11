@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { Anchor } from "@mantine/core";
-import classes from "./Logo.module.css";
 import { LogoProps } from "@/types/component";
+import { Anchor } from "@mantine/core";
+import Link from "next/link";
+import classes from "./Logo.module.css";
 
 export default function Logo({ size }: LogoProps) {
   return (

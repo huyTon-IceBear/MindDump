@@ -1,3 +1,4 @@
+import { NotificationMessages } from "@/constant/notification";
 import { useNotes, useNotesDispatch } from "@/context/NotesProvider";
 import { ActionOptions, ActionTypes, Note } from "@/types/note";
 import { truncateText } from "@/utils";
@@ -9,11 +10,10 @@ import {
   Menu,
 } from "@mantine/core";
 import { useClipboard, useDisclosure } from "@mantine/hooks";
-import { IconDots, IconEye, IconTrash, IconCopy } from "@tabler/icons-react";
-import NoteModal from "./NoteModal";
-import { useState } from "react";
 import { notifications } from "@mantine/notifications";
-import { NotificationMessages } from "@/constant/notification";
+import { IconCopy, IconDots, IconEye, IconTrash } from "@tabler/icons-react";
+import { useState } from "react";
+import NoteModal from "./NoteModal";
 
 function AccordionControl({
   note,

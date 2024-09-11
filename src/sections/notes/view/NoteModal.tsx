@@ -1,10 +1,9 @@
-import { Modal, Text, TextInput, Button, Stack } from "@mantine/core";
-import { useState, useEffect } from "react";
-import { Note } from "@/types/note";
-import { useNotesDispatch } from "@/context/NotesProvider";
-import { ActionTypes } from "@/types/note";
-import { notifications } from "@mantine/notifications";
 import { NotificationMessages } from "@/constant/notification";
+import { useNotesDispatch } from "@/context/NotesProvider";
+import { ActionTypes, Note } from "@/types/note";
+import { Button, Modal, Stack, Text, TextInput } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { useEffect, useState } from "react";
 
 interface NoteModalProps {
   opened: boolean;

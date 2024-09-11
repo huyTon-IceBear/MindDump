@@ -22,8 +22,16 @@ export default function ColorSchemeToggle() {
       size="lg"
       aria-label="Toggle color scheme"
     >
-      <IconSun className={cx(classes.icon, classes.light)} stroke={1.5} />
-      <IconMoon className={cx(classes.icon, classes.dark)} stroke={1.5} />
+      <IconSun
+        aria-label="Sun Icon"
+        className={cx(classes.icon, classes.light)}
+        stroke={1.5}
+      />
+      <IconMoon
+        aria-label="Moon Icon"
+        className={cx(classes.icon, classes.dark)}
+        stroke={1.5}
+      />
     </ActionIcon>
   );
 }

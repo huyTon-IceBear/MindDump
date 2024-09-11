@@ -1,12 +1,12 @@
 "use client";
 import CustomInput from "@/components/CustomInput";
-import { Button, Container, Stack, Transition } from "@mantine/core";
 import StarryBackground from "@/components/StarryBackground";
 import TypeWriter from "@/components/TypeWriter";
-import { useState, useEffect, useCallback } from "react";
 import { AppIntro } from "@/constant/text";
-import Note from "./view/Note";
 import { useNotes } from "@/context/NotesProvider";
+import { Button, Container, Stack, Transition } from "@mantine/core";
+import { useCallback, useEffect, useState } from "react";
+import Note from "./view/Note";
 
 export default function NoteView() {
   const [showTypeWriter, setShowTypeWriter] = useState(true);
