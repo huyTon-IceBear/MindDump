@@ -1,12 +1,22 @@
 import { useNotes } from "@/context/NotesProvider";
 import { Note } from "@/types/note";
 import { truncateText } from "@/utils";
-import { ActionIcon, List, Modal, rem, TextInput, Text } from "@mantine/core";
+import {
+  ActionIcon,
+  List,
+  Modal,
+  rem,
+  TextInput,
+  Text,
+  Highlight,
+  Stack,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconSearch } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
+import classes from "./AsyncSearch.module.css";
 
-export default function SearchButton() {
+export default function AsyncSearch() {
   const [opened, { open, close }] = useDisclosure(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredNotes, setFilteredNotes] = useState<Note[]>([]);
@@ -18,6 +28,26 @@ export default function SearchButton() {
     );
     setFilteredNotes(filtered);
   }, [searchQuery, notes]);
+
+  function ListItem() {
+    return (
+      <>
+        {filteredNotes.map((item) => (
+          <Stack key={item.id} className={classes.item}>
+            <Highlight className={classes.linkTitle} highlight={searchQuery}>
+              {truncateText(item.text, 50)}
+            </Highlight>
+            <Highlight
+              className={classes.linkDescription}
+              highlight={searchQuery}
+            >
+              {truncateText(item.text, 200)}
+            </Highlight>
+          </Stack>
+        ))}
+      </>
+    );
+  }
 
   return (
     <>
@@ -32,16 +62,7 @@ export default function SearchButton() {
             </ActionIcon>
           }
         />
-        <List spacing="xs" mt="md">
-          {filteredNotes.map((note) => (
-            <List.Item key={note.id}>
-              <Text fw={700}>{truncateText(note.text, 50)}</Text>
-              <Text fz="sm" c="dimmed">
-                {truncateText(note.text, 200)}
-              </Text>
-            </List.Item>
-          ))}
-        </List>
+        <ListItem />
       </Modal>
       <ActionIcon
         variant="transparent"

@@ -6,7 +6,7 @@ import { notifications } from "@mantine/notifications";
 import { IconList, IconTrash } from "@tabler/icons-react";
 import NoteAccordion from "./NoteAccordion";
 import classes from "./NoteList.module.css";
-import SearchButton from "@/components/SearchButton";
+import AsyncSearch from "@/components/AsyncSearch";
 
 export default function NoteBoard() {
   const dispatch = useNotesDispatch();
@@ -42,7 +42,7 @@ export default function NoteBoard() {
                   stroke={1.5}
                 />
               </ActionIcon>
-              <SearchButton />
+              <AsyncSearch />
             </Flex>
           </div>
           <NoteAccordion />
