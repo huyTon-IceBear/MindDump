@@ -56,7 +56,7 @@ export default function AsyncSearch() {
           placeholder="Search documentation..."
           value={searchQuery}
           onChange={(event) => setSearchQuery(event.currentTarget.value)}
-          rightSection={
+          leftSection={
             <ActionIcon variant="filled" color="transparent">
               <IconSearch size="1rem" />
             </ActionIcon>
