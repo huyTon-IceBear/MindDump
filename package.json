@@ -27,8 +27,8 @@
     "embla-carousel-react": "^8.1.8",
     "nanoid": "^5.0.7",
     "next": "^14.2.7",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
@@ -37,8 +37,8 @@
     "@testing-library/react": "^16.0.1",
     "@types/jest": "29.5.11",
     "@types/node": "^20.16.5",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.0.0",
+    "@types/react-dom": "19.0.0",
     "cz-git": "^1.9.4",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
