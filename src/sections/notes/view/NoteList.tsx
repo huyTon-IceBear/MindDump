@@ -6,6 +6,7 @@ import { notifications } from "@mantine/notifications";
 import { IconList, IconTrash } from "@tabler/icons-react";
 import NoteAccordion from "./NoteAccordion";
 import classes from "./NoteList.module.css";
+import AsyncSearch from "@/components/AsyncSearch";
 
 export default function NoteBoard() {
   const dispatch = useNotesDispatch();
@@ -22,24 +23,27 @@ export default function NoteBoard() {
               />
               <Text className={classes.title}>List of Notes</Text>
             </Flex>
-            <ActionIcon
-              variant="transparent"
-              aria-label="Delete Notes"
-              onClick={() => {
-                dispatch({ type: ActionTypes.REMOVE_NOTES });
-                notifications.show({
-                  position: "top-right",
-                  title: NotificationMessages.REMOVE_NOTES.title,
-                  message: NotificationMessages.REMOVE_NOTES.message,
-                  autoClose: 1500,
-                });
-              }}
-            >
-              <IconTrash
-                style={{ width: rem(20), height: rem(20) }}
-                stroke={1.5}
-              />
-            </ActionIcon>
+            <Flex align={"center"}>
+              <ActionIcon
+                variant="transparent"
+                aria-label="Delete Notes"
+                onClick={() => {
+                  dispatch({ type: ActionTypes.REMOVE_NOTES });
+                  notifications.show({
+                    position: "top-right",
+                    title: NotificationMessages.REMOVE_NOTES.title,
+                    message: NotificationMessages.REMOVE_NOTES.message,
+                    autoClose: 1500,
+                  });
+                }}
+              >
+                <IconTrash
+                  style={{ width: rem(20), height: rem(20) }}
+                  stroke={1.5}
+                />
+              </ActionIcon>
+              <AsyncSearch />
+            </Flex>
           </div>
           <NoteAccordion />
         </div>
