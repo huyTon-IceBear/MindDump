@@ -15,12 +15,14 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconSearch } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import classes from "./AsyncSearch.module.css";
+import NoteModal from "@/sections/notes/view/NoteModal";
 
 export default function AsyncSearch() {
   const [opened, { open, close }] = useDisclosure(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredNotes, setFilteredNotes] = useState<Note[]>([]);
   const { notes } = useNotes();
+  const [selectedNote, setSelectedNote] = useState<Note | null>(null); // Store selected note
 
   useEffect(() => {
     const filtered = notes.filter((note) =>
@@ -29,11 +31,22 @@ export default function AsyncSearch() {
     setFilteredNotes(filtered);
   }, [searchQuery, notes]);
 
+  const handleClick = (note: Note) => {
+    close();
+    setSelectedNote(note);
+  };
+
   function ListItem() {
     return (
       <>
         {filteredNotes.map((item) => (
-          <Stack key={item.id} className={classes.item}>
+          <Stack
+            key={item.id}
+            className={classes.item}
+            onClick={() => {
+              handleClick(item);
+            }}
+          >
             <Highlight className={classes.linkTitle} highlight={searchQuery}>
               {truncateText(item.text, 50)}
             </Highlight>
@@ -51,6 +64,13 @@ export default function AsyncSearch() {
 
   return (
     <>
+      {/* {selectedNote && (
+        <NoteModal
+          opened={false}
+          onClose={close}
+          note={selectedNote} // Pass the selected note to the modal
+        />
+      )} */}
       <Modal opened={opened} onClose={close} size="lg" withCloseButton={false}>
         <TextInput
           placeholder="Search documentation..."
