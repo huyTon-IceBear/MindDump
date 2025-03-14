@@ -4,6 +4,7 @@ import { ActionTypes } from "@/types/note";
 import { Textarea } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import React, { useState } from "react";
+import ImageDropzone from "../ImageDropzone";
 
 export default function CustomInput() {
   const [value, setValue] = useState("");
@@ -43,6 +44,7 @@ export default function CustomInput() {
       autosize
       minRows={2}
       maxRows={4}
+      rightSection={<ImageDropzone />}
     />
   );
 }
