@@ -28,3 +28,17 @@ export interface EmptyNoteProps {
   description?: string;
   icon?: React.ReactNode;
 }
+
+export interface FileWithUrl extends File {
+  url: string;
+  id: string;
+}
+
+export interface CarouselProps {
+  sliderData: FileWithUrl[];
+  onDelete: (imageID: string) => void;
+}
+
+export interface ImageDropzoneProps {
+  onDrop: (files: FileWithUrl[]) => void;
+}

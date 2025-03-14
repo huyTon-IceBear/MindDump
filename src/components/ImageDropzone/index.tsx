@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { ActionIcon } from "@mantine/core";
 import { IconUpload } from "@tabler/icons-react";
 import { useDropzone } from "react-dropzone";
-import Carousel from "../Carousel";
-import { FileWithUrl } from "@/types/component";
+import { ImageDropzoneProps } from "@/types/component";
+import { v4 as uuidv4 } from "uuid";
 
-export default function ImageDropzone() {
-  const [files, setFiles] = useState<FileWithUrl[]>([]);
+export default function ImageDropzone({ onDrop }: ImageDropzoneProps) {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/png": [".png"],
@@ -16,13 +15,13 @@ export default function ImageDropzone() {
       "image/webp": [".webp"],
     },
     onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            url: URL.createObjectURL(file),
-          })
-        )
+      const filesWithUrl = acceptedFiles.map((file) =>
+        Object.assign(file, {
+          url: URL.createObjectURL(file),
+          id: uuidv4(),
+        })
       );
+      onDrop(filesWithUrl);
     },
   });
 

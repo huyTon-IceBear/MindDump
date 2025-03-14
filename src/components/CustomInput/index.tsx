@@ -5,9 +5,12 @@ import { Textarea } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import React, { useState } from "react";
 import ImageDropzone from "../ImageDropzone";
+import Carousel from "../Carousel";
+import { FileWithUrl } from "@/types/component";
 
 export default function CustomInput() {
   const [value, setValue] = useState("");
+  const [files, setFiles] = useState<FileWithUrl[]>([]);
 
   const dispatch = useNotesDispatch();
 
@@ -34,17 +37,29 @@ export default function CustomInput() {
     setValue(event.currentTarget.value);
   };
 
+  const handleRemoveImage = (imageId: string) => {
+    let newImageFiles = files.filter((file) => file.id !== imageId);
+    setFiles(newImageFiles);
+  };
+
   return (
-    <Textarea
-      value={value}
-      label="What's on your mind?"
-      placeholder="Start typing your thoughts..."
-      onChange={handleChange} // Handle input changes
-      onKeyDown={handleKeyDown} // Handle key presses
-      autosize
-      minRows={2}
-      maxRows={4}
-      rightSection={<ImageDropzone />}
-    />
+    <div>
+      <Textarea
+        value={value}
+        label="What's on your mind?"
+        placeholder="Start typing your thoughts..."
+        onChange={handleChange} // Handle input changes
+        onKeyDown={handleKeyDown} // Handle key presses
+        autosize
+        minRows={2}
+        maxRows={4}
+        rightSection={
+          <ImageDropzone onDrop={(newFiles) => setFiles(newFiles)} />
+        }
+      />
+      {files.length > 0 && (
+        <Carousel sliderData={files} onDelete={handleRemoveImage} />
+      )}
+    </div>
   );
 }
