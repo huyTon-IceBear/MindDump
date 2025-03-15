@@ -1,12 +1,26 @@
 .embla {
   overflow: hidden;
 }
+
 .embla__viewport {
 }
+
 .embla__container {
   display: flex;
 }
+
 .embla__slide {
   flex: 0 0 100%;
   min-width: 0;
+}
+
+.indicatorBox {
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 50px;
+  transition: background-color 0.3s, border-color 0.3s;
 }
