@@ -6,13 +6,13 @@ This application allows users to jot down their thoughts with a simple and intui
 
 ### Completed Features:
 
-- Create, edit, and delete notes
+- Create, edit, and delete note
 - Display an animation when adding notes (glowing star effect in the background)
 - Show notifications for creating, editing, and deleting notes
+- Add image attachments to note
 
 ### In Development:
 
-- Add image attachments to notes
 - Implement user feedback functionality
 - Support internationalization for multilingual accessibility
 

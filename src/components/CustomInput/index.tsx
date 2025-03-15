@@ -1,12 +1,18 @@
 import { NotificationMessages } from "@/constant/notification";
 import { useNotesDispatch } from "@/context/NotesProvider";
 import { ActionTypes } from "@/types/note";
-import { Textarea } from "@mantine/core";
+
+import { Box, Textarea } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import React, { useState } from "react";
+import ImageDropzone from "../ImageDropzone";
+import Carousel from "../Carousel";
+import { FileWithUrl } from "@/types/note";
+import { handleRemoveImage } from "@/utils";
 
 export default function CustomInput() {
   const [value, setValue] = useState("");
+  const [files, setFiles] = useState<FileWithUrl[]>([]);
 
   const dispatch = useNotesDispatch();
 
@@ -16,7 +22,11 @@ export default function CustomInput() {
       event.preventDefault(); // Prevent the default behavior of adding a newline
       // Check if the input value is not empty
       if (value.trim() !== "") {
-        dispatch({ type: ActionTypes.ADD_NOTE, text: value });
+        dispatch({
+          type: ActionTypes.ADD_NOTE,
+          text: value,
+          mediaFiles: files,
+        });
         notifications.show({
           position: "top-right",
           title: NotificationMessages.ADD_NOTE.title,
@@ -24,6 +34,7 @@ export default function CustomInput() {
           autoClose: 1500,
         });
         setValue(""); // Clear the input after dispatching the action
+        setFiles([]);
       }
     }
   };
@@ -33,16 +44,38 @@ export default function CustomInput() {
     setValue(event.currentTarget.value);
   };
 
+  const removeImage = handleRemoveImage(setFiles);
+
   return (
-    <Textarea
-      value={value}
-      label="What's on your mind?"
-      placeholder="Start typing your thoughts..."
-      onChange={handleChange} // Handle input changes
-      onKeyDown={handleKeyDown} // Handle key presses
-      autosize
-      minRows={2}
-      maxRows={4}
-    />
+    <Box
+      bd={"1px solid rgb(95,99,104)"}
+      bg="rgb(32,33,36)"
+      style={{ borderRadius: "10px", boxShadow: "0 3px 5px rgba(0,0,0,.20)" }}
+    >
+      <Textarea
+        variant="unstyled"
+        value={value}
+        label="What's on your mind?"
+        placeholder="Start typing your thoughts..."
+        onChange={handleChange} // Handle input changes
+        onKeyDown={handleKeyDown} // Handle key presses
+        autosize
+        minRows={2}
+        maxRows={4}
+        radius={0}
+        px={"xs"}
+        pt={"sm"}
+        rightSection={
+          <ImageDropzone
+            onDrop={(newFiles) =>
+              setFiles((prevFiles) => [...prevFiles, ...newFiles])
+            }
+          />
+        }
+      />
+      {files.length > 0 && (
+        <Carousel sliderData={files} onDelete={removeImage} />
+      )}
+    </Box>
   );
 }

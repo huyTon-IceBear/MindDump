@@ -1,3 +1,5 @@
+import { FileWithUrl } from "./note";
+
 export interface CustomQuoteProps {
     source: string;
     quote: string;
@@ -27,4 +29,14 @@ export interface TypeWriterProps {
 export interface EmptyNoteProps {
   description?: string;
   icon?: React.ReactNode;
+}
+
+export interface CarouselProps {
+  sliderData: FileWithUrl[];
+  onDelete: (imageID: string) => void;
+  canEdit?: boolean;
+}
+
+export interface ImageDropzoneProps {
+  onDrop: (files: FileWithUrl[]) => void;
 }
