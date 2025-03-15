@@ -84,6 +84,7 @@ function notesReducer(notes: Note[], action: NoteAction): Note[] {
         {
           id: nanoid(),
           text: action.text,
+          mediaFiles: action.mediaFiles,
         },
       ];
     }

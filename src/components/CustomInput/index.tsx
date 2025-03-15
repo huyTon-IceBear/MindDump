@@ -2,12 +2,13 @@ import { NotificationMessages } from "@/constant/notification";
 import { useNotesDispatch } from "@/context/NotesProvider";
 import { ActionTypes } from "@/types/note";
 
-import { Box, Textarea, Text } from "@mantine/core";
+import { Box, Textarea } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import React, { useState } from "react";
 import ImageDropzone from "../ImageDropzone";
 import Carousel from "../Carousel";
-import { FileWithUrl } from "@/types/component";
+import { FileWithUrl } from "@/types/note";
+import { handleRemoveImage } from "@/utils";
 
 export default function CustomInput() {
   const [value, setValue] = useState("");
@@ -21,7 +22,11 @@ export default function CustomInput() {
       event.preventDefault(); // Prevent the default behavior of adding a newline
       // Check if the input value is not empty
       if (value.trim() !== "") {
-        dispatch({ type: ActionTypes.ADD_NOTE, text: value });
+        dispatch({
+          type: ActionTypes.ADD_NOTE,
+          text: value,
+          mediaFiles: files,
+        });
         notifications.show({
           position: "top-right",
           title: NotificationMessages.ADD_NOTE.title,
@@ -29,6 +34,7 @@ export default function CustomInput() {
           autoClose: 1500,
         });
         setValue(""); // Clear the input after dispatching the action
+        setFiles([]);
       }
     }
   };
@@ -38,10 +44,7 @@ export default function CustomInput() {
     setValue(event.currentTarget.value);
   };
 
-  const handleRemoveImage = (imageId: string) => {
-    let newImageFiles = files.filter((file) => file.id !== imageId);
-    setFiles(newImageFiles);
-  };
+  const removeImage = handleRemoveImage(setFiles);
 
   return (
     <Box
@@ -63,11 +66,15 @@ export default function CustomInput() {
         px={"xs"}
         pt={"sm"}
         rightSection={
-          <ImageDropzone onDrop={(newFiles) => setFiles(newFiles)} />
+          <ImageDropzone
+            onDrop={(newFiles) =>
+              setFiles((prevFiles) => [...prevFiles, ...newFiles])
+            }
+          />
         }
       />
       {files.length > 0 && (
-        <Carousel sliderData={files} onDelete={handleRemoveImage} />
+        <Carousel sliderData={files} onDelete={removeImage} />
       )}
     </Box>
   );

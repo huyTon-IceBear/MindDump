@@ -9,12 +9,17 @@ import {
   Text,
   NumberInput,
 } from "@mantine/core";
-import { CarouselProps, FileWithUrl } from "@/types/component";
+import { CarouselProps } from "@/types/component";
 import { IconTrash, IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import classes from "./Carousel.module.css";
 import { useClickOutside } from "@mantine/hooks";
+import { FileWithUrl } from "@/types/note";
 
-export default function Carousel({ sliderData, onDelete }: CarouselProps) {
+export default function Carousel({
+  sliderData,
+  onDelete,
+  canEdit = true,
+}: CarouselProps) {
   const [hovered, setHovered] = useState(false);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
@@ -95,7 +100,7 @@ export default function Carousel({ sliderData, onDelete }: CarouselProps) {
                     fit="contain"
                   />
                   {/* Delete Button (Visible on Hover) */}
-                  {hovered && (
+                  {canEdit && hovered && (
                     <ActionIcon
                       variant="default"
                       size="sm"
