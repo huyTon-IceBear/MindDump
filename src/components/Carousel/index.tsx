@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import {
   Image,
@@ -21,19 +21,21 @@ export default function Carousel({
   canEdit = true,
 }: CarouselProps) {
   const [hovered, setHovered] = useState(false);
-
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
-
   const [selectedIndex, setSelectedIndex] = useState(0);
-
   const [isEditing, setIsEditing] = useState(false);
-  const [value, setValue] = useState<string | number>("");
+  const [value, setValue] = useState<string | number>(selectedIndex + 1); // Initialize with selectedIndex + 1
 
   const ref = useClickOutside(() => {
     setIsEditing(false);
     setValue(selectedIndex + 1);
   });
+
+  // Synchronize value with selectedIndex
+  useEffect(() => {
+    setValue(selectedIndex + 1); // Update value whenever selectedIndex changes
+  }, [selectedIndex]);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) {
@@ -58,8 +60,8 @@ export default function Carousel({
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       event.preventDefault(); // Prevent the default behavior of adding a newline
-      // Check if the input value is not empty
-      if (typeof value === "number") {
+      // Check if the input value is not empty and a valid number
+      if (typeof value === "number" && value >= 1 && value <= totalSlides) {
         setSelectedIndex(value - 1);
         emblaApi && emblaApi.scrollTo(value - 1);
         setIsEditing(false);
