@@ -112,6 +112,11 @@ export default function Carousel({
                       }}
                       onClick={() => {
                         onDelete(item.id);
+                        setSelectedIndex((prevIndex) =>
+                          prevIndex >= totalSlides - 1
+                            ? Math.max(totalSlides - 2, 0)
+                            : prevIndex
+                        );
                       }}
                     >
                       <IconTrash
