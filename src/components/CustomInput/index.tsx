@@ -1,7 +1,8 @@
 import { NotificationMessages } from "@/constant/notification";
 import { useNotesDispatch } from "@/context/NotesProvider";
 import { ActionTypes } from "@/types/note";
-import { Textarea } from "@mantine/core";
+
+import { Box, Textarea, Text } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import React, { useState } from "react";
 import ImageDropzone from "../ImageDropzone";
@@ -43,8 +44,13 @@ export default function CustomInput() {
   };
 
   return (
-    <div>
+    <Box
+      bd={"1px solid rgb(95,99,104)"}
+      bg="rgb(32,33,36)"
+      style={{ borderRadius: "10px", boxShadow: "0 3px 5px rgba(0,0,0,.20)" }}
+    >
       <Textarea
+        variant="unstyled"
         value={value}
         label="What's on your mind?"
         placeholder="Start typing your thoughts..."
@@ -53,6 +59,9 @@ export default function CustomInput() {
         autosize
         minRows={2}
         maxRows={4}
+        radius={0}
+        px={"xs"}
+        pt={"sm"}
         rightSection={
           <ImageDropzone onDrop={(newFiles) => setFiles(newFiles)} />
         }
@@ -60,6 +69,6 @@ export default function CustomInput() {
       {files.length > 0 && (
         <Carousel sliderData={files} onDelete={handleRemoveImage} />
       )}
-    </div>
+    </Box>
   );
 }

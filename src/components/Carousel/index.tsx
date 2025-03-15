@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import {
   Image,
@@ -121,7 +121,7 @@ export default function Carousel({ sliderData, onDelete }: CarouselProps) {
           </div>
         </div>
         {/* Navigation & Indicators */}
-        <Group justify="space-between" mt="md">
+        <Group justify="space-between" mt="xs" mb="xs" px="xs">
           <ActionIcon
             variant="default"
             aria-label="prev__image"
