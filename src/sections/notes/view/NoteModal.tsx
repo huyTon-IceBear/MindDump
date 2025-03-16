@@ -2,7 +2,7 @@ import Carousel from "@/components/Carousel";
 import ImageDropzone from "@/components/ImageDropzone";
 import { NotificationMessages } from "@/constant/notification";
 import { useNotesDispatch } from "@/context/NotesProvider";
-import { ActionTypes, FileWithUrl, Note } from "@/types/note";
+import { ActionTypes, UploadedImage, Note } from "@/types/note";
 import { handleRemoveImage } from "@/utils";
 import { Button, Modal, Stack, Text, TextInput } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
@@ -19,7 +19,7 @@ export default function NoteModal({ opened, onClose, note }: NoteModalProps) {
   const [editMode, setEditMode] = useState(false);
   const [editedText, setEditedText] = useState("");
   const dispatch = useNotesDispatch();
-  const [files, setFiles] = useState<FileWithUrl[]>([]);
+  const [files, setFiles] = useState<UploadedImage[]>([]);
 
   useEffect(() => {
     if (note) {

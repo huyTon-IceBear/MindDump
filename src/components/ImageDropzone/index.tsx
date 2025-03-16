@@ -15,13 +15,31 @@ export default function ImageDropzone({ onDrop }: ImageDropzoneProps) {
       "image/webp": [".webp"],
     },
     onDrop: (acceptedFiles) => {
-      const filesWithUrl = acceptedFiles.map((file) =>
-        Object.assign(file, {
-          url: URL.createObjectURL(file),
-          id: uuidv4(),
-        })
-      );
-      onDrop(filesWithUrl);
+      const filesWithUrl = acceptedFiles.map((file) => {
+        const src = URL.createObjectURL(file);
+        const id = uuidv4();
+
+        // Create an image element to load and get the dimensions
+        const img = new Image();
+        img.src = src;
+
+        return new Promise<any>((resolve) => {
+          img.onload = () => {
+            resolve({
+              ...file,
+              src,
+              id,
+              width: img.width,
+              height: img.height,
+            });
+          };
+        });
+      });
+
+      // Wait for all images to load and get their dimensions
+      Promise.all(filesWithUrl).then((filesWithDimensions) => {
+        onDrop(filesWithDimensions); // Pass the data with width and height
+      });
     },
   });
 

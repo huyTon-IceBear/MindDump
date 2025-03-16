@@ -7,12 +7,12 @@ import { notifications } from "@mantine/notifications";
 import React, { useState } from "react";
 import ImageDropzone from "../ImageDropzone";
 import Carousel from "../Carousel";
-import { FileWithUrl } from "@/types/note";
+import { UploadedImage } from "@/types/note";
 import { handleRemoveImage } from "@/utils";
 
 export default function CustomInput() {
   const [value, setValue] = useState("");
-  const [files, setFiles] = useState<FileWithUrl[]>([]);
+  const [files, setFiles] = useState<UploadedImage[]>([]);
 
   const dispatch = useNotesDispatch();
 

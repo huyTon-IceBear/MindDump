@@ -31,7 +31,8 @@
     "react-dom": "19.0.0",
     "react-dropzone": "^14.3.8",
     "ts-node": "^10.9.2",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "yet-another-react-lightbox": "^3.21.8"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",

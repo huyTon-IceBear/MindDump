@@ -3,7 +3,6 @@ import useEmblaCarousel from "embla-carousel-react";
 import {
   Image,
   ActionIcon,
-  Modal,
   Box,
   Group,
   Text,
@@ -13,7 +12,8 @@ import { CarouselProps } from "@/types/component";
 import { IconTrash, IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import classes from "./Carousel.module.css";
 import { useClickOutside } from "@mantine/hooks";
-import { FileWithUrl } from "@/types/note";
+import { UploadedImage } from "@/types/note";
+import ImageLightbox from "../ImageLightbox";
 
 export default function Carousel({
   sliderData,
@@ -22,10 +22,10 @@ export default function Carousel({
 }: CarouselProps) {
   const [hovered, setHovered] = useState(false);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
-  const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState<string | number>(selectedIndex + 1); // Initialize with selectedIndex + 1
+  const [open, setOpen] = useState(false);
 
   const ref = useClickOutside(() => {
     setIsEditing(false);
@@ -75,7 +75,7 @@ export default function Carousel({
       <div className={classes.embla}>
         <div className={classes.embla__viewport} ref={emblaRef}>
           <div className={classes.embla__container}>
-            {sliderData.map((item: FileWithUrl) => (
+            {sliderData.map((item: UploadedImage, index) => (
               <div className={classes.embla__slide} key={item.id}>
                 {/* Image */}
                 <Box
@@ -93,10 +93,10 @@ export default function Carousel({
                   onMouseLeave={() => setHovered(false)}
                 >
                   <Image
-                    src={item.url}
+                    src={item.src}
                     h={200}
                     alt="slide_image"
-                    onClick={() => setFullscreenImage(item.url)}
+                    onClick={() => setOpen(true)}
                     loading="lazy"
                     w="auto"
                     fit="contain"
@@ -186,14 +186,14 @@ export default function Carousel({
         </Group>
       </div>
 
-      {/* Fullscreen Modal */}
-      <Modal
-        opened={!!fullscreenImage}
-        onClose={() => setFullscreenImage(null)}
-        size="auto"
-      >
-        <Image src={fullscreenImage || ""} alt="Fullscreen Preview" />
-      </Modal>
+      {/* Lightbox Image*/}
+      {open && (
+        <ImageLightbox
+          images={sliderData}
+          onClose={() => setOpen(false)}
+          selectedIndex={selectedIndex}
+        />
+      )}
     </div>
   );
 }
