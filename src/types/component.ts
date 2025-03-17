@@ -1,4 +1,4 @@
-import { UploadedImage } from "./note";
+import { Note, UploadedImage } from "./note";
 
 export interface CustomQuoteProps {
     source: string;
@@ -44,4 +44,9 @@ export interface ImageLightboxProps {
   onClose: () => void;
   images: UploadedImage[];
   selectedIndex?: number;
+}
+
+export interface NoteCardProps{
+  note: Note;
+  handleClick: ()=>void;
 }

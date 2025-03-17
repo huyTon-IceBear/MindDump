@@ -72,7 +72,7 @@ export default function StarryBackground() {
   return (
     <div
       style={{
-        background: "inherit",
+        background: "rgb(32,33,36)",
         position: "relative",
         width: "100%",
       }}

@@ -70,7 +70,7 @@ function AccordionControl({
           <Menu.Dropdown>
             <Menu.Item
               leftSection={<IconEye size={14} />}
-              onClick={(e) => {
+              onClick={() => {
                 handleSelectOption(ActionOptions.View);
               }}
             >
