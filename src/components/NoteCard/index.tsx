@@ -1,9 +1,19 @@
 import { NoteCardProps } from "@/types/component";
-import { Card, Image, Text } from "@mantine/core";
+import {
+  AspectRatio,
+  Card,
+  Center,
+  Image,
+  Overlay,
+  Text,
+  Title,
+} from "@mantine/core";
 import { useState } from "react";
 
 export default function NoteCard({ note, handleClick }: NoteCardProps) {
   const [hovered, setHovered] = useState(false);
+
+  const totalMediaFiles = note.mediaFiles.length;
 
   return (
     <Card
@@ -16,9 +26,20 @@ export default function NoteCard({ note, handleClick }: NoteCardProps) {
       onClick={handleClick}
     >
       <Card.Section>
-        {note.mediaFiles.map((image) => (
-          <Image key={note.id} src={image.src} height={140} alt="Media file" />
-        ))}
+        <AspectRatio ratio={16 / 9} maw={400} mx="auto" pos="relative">
+          <Image
+            src={note.mediaFiles[0].src}
+            alt="Media file"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+          {totalMediaFiles > 1 && (
+            <Overlay color="rgba(0,0,0,.4)" backgroundOpacity={0.65}>
+              <Center style={{ height: "100%" }}>
+                <Title>{"+" + `${totalMediaFiles - 1}`}</Title>
+              </Center>
+            </Overlay>
+          )}
+        </AspectRatio>
       </Card.Section>
 
       <Text size="sm" c="dimmed" mt="md" mb="xs">
