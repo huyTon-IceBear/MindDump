@@ -4,21 +4,22 @@ import NoteCard from "@/components/NoteCard";
 import StarryBackground from "@/components/StarryBackground";
 import TypeWriter from "@/components/TypeWriter";
 import { AppIntro } from "@/constant/text";
-import { useNotes } from "@/context/NotesProvider";
+import { useNotes, useNotesDispatch } from "@/context/NotesProvider";
+import { ActionTypes, Note as NoteType } from "@/types/note";
 import {
   Box,
   Button,
   Container,
+  Flex,
   Grid,
+  Transition as MantineTransition,
   Space,
   Stack,
-  Transition as MantineTransition,
   Text,
 } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Note from "./view/Note";
-import { Note as NoteType } from "@/types/note";
-import { useDisclosure } from "@mantine/hooks";
 import NoteModal from "./view/NoteModal";
 
 // Framer Motion imports
@@ -42,6 +43,22 @@ export default function NoteView() {
     () => notes.filter((note) => !note.pinned),
     [notes]
   );
+
+  const dispatch = useNotesDispatch();
+
+  const handleRemoveAllPinned = () => {
+    pinnedNotes.map((note) => {
+      const updatedNote = {
+        ...note,
+        pinned: !note.pinned,
+      };
+
+      dispatch({
+        type: ActionTypes.CHANGE_NOTE,
+        note: updatedNote,
+      });
+    });
+  };
 
   useEffect(() => {
     if (notes.length > 0) {
@@ -127,9 +144,21 @@ export default function NoteView() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <Text size="xs" c="dimmed" fw={700}>
-                PINNED
-              </Text>
+              <Flex gap="md" align="center">
+                <Text size="xs" c="dimmed" fw={700}>
+                  PINNED
+                </Text>
+                <Button
+                  variant="transparent"
+                  onClick={() => {
+                    handleRemoveAllPinned();
+                  }}
+                >
+                  <Text size="xs" c="dimmed" fw={700} td="underline">
+                    Remove all pins
+                  </Text>
+                </Button>
+              </Flex>
             </motion.div>
           )}
         </AnimatePresence>
