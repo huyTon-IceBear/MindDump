@@ -1,4 +1,4 @@
-import { FileWithUrl } from "@/types/note";
+import { UploadedImage } from "@/types/note";
 
 export function truncateText(text:string, maxLength: number) {
     return text.length > maxLength 
@@ -6,7 +6,7 @@ export function truncateText(text:string, maxLength: number) {
       : text;
 }
 
-export const handleRemoveImage = (setFiles: React.Dispatch<React.SetStateAction<FileWithUrl[]>>) => {
+export const handleRemoveImage = (setFiles: React.Dispatch<React.SetStateAction<UploadedImage[]>>) => {
   return (imageId: string) => {
     setFiles((prevFiles) => prevFiles.filter((file) => file.id !== imageId));
   };

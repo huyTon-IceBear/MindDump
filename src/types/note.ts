@@ -1,7 +1,8 @@
 export interface Note {
     id: string;
     text: string;
-    mediaFiles: FileWithUrl[];
+    mediaFiles: UploadedImage[];
+    pinned: boolean;
 };
 
 // Define action types as an enum to ensure consistency and prevent typos
@@ -16,7 +17,7 @@ export enum ActionTypes {
 export type AddNoteAction = {
     type: ActionTypes.ADD_NOTE;
     text: string;
-    mediaFiles: FileWithUrl[];
+    mediaFiles: UploadedImage[];
 };
   
 export type ChangeNoteAction = {
@@ -48,8 +49,11 @@ export enum ActionOptions {
 
 export const NoteActionOptions: string[] =  Object.values(ActionOptions);
 
-export interface FileWithUrl extends File {
-    url: string;
+export interface UploadedImage extends File {
+    src: string;
     id: string;
-  }
+    width: number;
+    height: number;
+    type: "image";
+}
   

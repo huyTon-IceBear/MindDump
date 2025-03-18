@@ -1,4 +1,4 @@
-import { FileWithUrl } from "./note";
+import { Note, UploadedImage } from "./note";
 
 export interface CustomQuoteProps {
     source: string;
@@ -32,11 +32,21 @@ export interface EmptyNoteProps {
 }
 
 export interface CarouselProps {
-  sliderData: FileWithUrl[];
+  sliderData: UploadedImage[];
   onDelete: (imageID: string) => void;
   canEdit?: boolean;
 }
 
 export interface ImageDropzoneProps {
-  onDrop: (files: FileWithUrl[]) => void;
+  onDrop: (files: UploadedImage[]) => void;
+}
+export interface ImageLightboxProps {
+  onClose: () => void;
+  images: UploadedImage[];
+  selectedIndex?: number;
+}
+
+export interface NoteCardProps{
+  note: Note;
+  handleClick: ()=>void;
 }
