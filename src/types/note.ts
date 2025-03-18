@@ -2,6 +2,7 @@ export interface Note {
     id: string;
     text: string;
     mediaFiles: UploadedImage[];
+    pinned: boolean;
 };
 
 // Define action types as an enum to ensure consistency and prevent typos

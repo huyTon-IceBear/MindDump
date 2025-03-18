@@ -1,5 +1,8 @@
+import { useNotesDispatch } from "@/context/NotesProvider";
 import { NoteCardProps } from "@/types/component";
+import { ActionTypes } from "@/types/note";
 import {
+  ActionIcon,
   AspectRatio,
   Card,
   Center,
@@ -8,11 +11,25 @@ import {
   Text,
   Title,
 } from "@mantine/core";
+import { IconPin, IconPinFilled } from "@tabler/icons-react";
 import { useState } from "react";
 
 export default function NoteCard({ note, handleClick }: NoteCardProps) {
   const [hovered, setHovered] = useState(false);
   const totalMediaFiles = note.mediaFiles.length;
+  const dispatch = useNotesDispatch();
+
+  const handlePinClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    const updatedNote = {
+      ...note,
+      pinned: !note.pinned,
+    };
+    dispatch({
+      type: ActionTypes.CHANGE_NOTE,
+      note: updatedNote,
+    });
+  };
 
   return (
     <Card
@@ -42,6 +59,27 @@ export default function NoteCard({ note, handleClick }: NoteCardProps) {
           </AspectRatio>
         </Card.Section>
       )}
+
+      <ActionIcon
+        variant="subtle"
+        color="white"
+        aria-label="Pin"
+        pos="absolute"
+        right={8}
+        top={8}
+        onClick={handlePinClick}
+        style={{
+          borderRadius: "50%",
+          zIndex: 2,
+        }}
+      >
+        {note.pinned ? (
+          <IconPinFilled style={{ width: "70%", height: "70%" }} stroke={1.5} />
+        ) : (
+          <IconPin style={{ width: "70%", height: "70%" }} stroke={1.5} />
+        )}
+      </ActionIcon>
+
       <Text size="sm" c="dimmed" mt="md" mb="xs">
         {note.text}
       </Text>

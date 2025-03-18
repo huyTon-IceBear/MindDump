@@ -13,8 +13,9 @@ import {
   Space,
   Stack,
   Transition,
+  Text,
 } from "@mantine/core";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Note from "./view/Note";
 import { Note as NoteType } from "@/types/note";
 import { useDisclosure } from "@mantine/hooks";
@@ -28,6 +29,16 @@ export default function NoteView() {
 
   const [opened, { open, close }] = useDisclosure(false); // Move state management here
   const [selectedNote, setSelectedNote] = useState<NoteType | null>(null); // Store selected note
+
+  // Memoize filtered notes to avoid unnecessary re-calculations.
+  const pinnedNotes = useMemo(
+    () => notes.filter((note) => note.pinned),
+    [notes]
+  );
+  const unpinnedNotes = useMemo(
+    () => notes.filter((note) => !note.pinned),
+    [notes]
+  );
 
   useEffect(() => {
     if (notes.length > 0) {
@@ -101,21 +112,62 @@ export default function NoteView() {
           )}
         </Stack>
       </Stack>
+
       <Space h="xl" />
 
-      <Grid gutter={{ base: 10, md: "md", lg: "lg" }}>
-        {notes.map((note) => (
-          <Grid.Col key={note.id} span={{ base: 12, sm: 6, md: 3, lg: 2 }}>
-            <NoteCard
-              note={note}
-              handleClick={() => {
-                setSelectedNote(note);
-                open();
-              }}
-            />
-          </Grid.Col>
-        ))}
-      </Grid>
+      <Stack>
+        {pinnedNotes.length > 0 && (
+          <Stack gap="xs">
+            <Text size="xs" c="dimmed" fw={700}>
+              PINNED
+            </Text>
+            <Grid gutter={{ base: 10, md: "md", lg: "lg" }}>
+              {pinnedNotes.map((note) => (
+                <Grid.Col
+                  key={note.id}
+                  span={{ base: 12, sm: 6, md: 3, lg: 2 }}
+                >
+                  <NoteCard
+                    note={note}
+                    handleClick={() => {
+                      setSelectedNote(note);
+                      open();
+                    }}
+                  />
+                </Grid.Col>
+              ))}
+            </Grid>
+          </Stack>
+        )}
+        <Space h="xl" />
+
+        {unpinnedNotes.length > 0 && (
+          <Stack gap="xs">
+            {pinnedNotes.length > 0 && (
+              <Text size="xs" c="dimmed" fw={700}>
+                OTHERS
+              </Text>
+            )}
+            <Grid gutter={{ base: 10, md: "md", lg: "lg" }}>
+              {unpinnedNotes.map((note) => (
+                <Grid.Col
+                  key={note.id}
+                  span={{ base: 12, sm: 6, md: 3, lg: 2 }}
+                >
+                  <NoteCard
+                    note={note}
+                    handleClick={() => {
+                      setSelectedNote(note);
+                      open();
+                    }}
+                  />
+                </Grid.Col>
+              ))}
+            </Grid>
+          </Stack>
+        )}
+      </Stack>
+
       {selectedNote && (
         <NoteModal
           opened={opened}
