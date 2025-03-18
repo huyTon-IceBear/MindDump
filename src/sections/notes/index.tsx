@@ -12,7 +12,7 @@ import {
   Grid,
   Space,
   Stack,
-  Transition,
+  Transition as MantineTransition,
   Text,
 } from "@mantine/core";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -21,13 +21,16 @@ import { Note as NoteType } from "@/types/note";
 import { useDisclosure } from "@mantine/hooks";
 import NoteModal from "./view/NoteModal";
 
+// Framer Motion imports
+import { AnimatePresence, motion } from "framer-motion";
+
 export default function NoteView() {
   const [showTypeWriter, setShowTypeWriter] = useState(true);
   const [typewriterComplete, setTypewriterComplete] = useState(false);
   const [skipTypewriter, setSkipTypewriter] = useState(false);
   const { notes } = useNotes();
 
-  const [opened, { open, close }] = useDisclosure(false); // Move state management here
+  const [opened, { open, close }] = useDisclosure(false);
   const [selectedNote, setSelectedNote] = useState<NoteType | null>(null); // Store selected note
 
   // Memoize filtered notes to avoid unnecessary re-calculations.
@@ -75,7 +78,7 @@ export default function NoteView() {
         <Stack w={600}>
           {showTypeWriter ? (
             <Box>
-              <Transition
+              <MantineTransition
                 mounted={showTypeWriter}
                 transition="fade"
                 duration={400}
@@ -89,7 +92,7 @@ export default function NoteView() {
                       onComplete={handleTypewriterComplete}
                       skip={skipTypewriter}
                     />
-                    <Transition
+                    <MantineTransition
                       mounted={typewriterComplete}
                       transition="fade"
                       duration={400}
@@ -102,10 +105,10 @@ export default function NoteView() {
                           </Button>
                         </div>
                       )}
-                    </Transition>
+                    </MantineTransition>
                   </div>
                 )}
-              </Transition>
+              </MantineTransition>
             </Box>
           ) : (
             <CustomInput />
@@ -116,17 +119,29 @@ export default function NoteView() {
       <Space h="xl" />
 
       <Stack>
+        {/* Pinned Section */}
+        <AnimatePresence>
+          {pinnedNotes.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
+              <Text size="xs" c="dimmed" fw={700}>
+                PINNED
+              </Text>
+            </motion.div>
+          )}
+        </AnimatePresence>
         {pinnedNotes.length > 0 && (
-          <Stack gap="xs">
-            <Text size="xs" c="dimmed" fw={700}>
-              PINNED
-            </Text>
-            <Grid gutter={{ base: 10, md: "md", lg: "lg" }}>
-              {pinnedNotes.map((note) => (
-                <Grid.Col
-                  key={note.id}
-                  span={{ base: 12, sm: 6, md: 3, lg: 2 }}
-                >
+          <Grid gutter={{ base: 10, md: "md", lg: "lg" }}>
+            {pinnedNotes.map((note) => (
+              <Grid.Col
+                key={note.id}
+                span={{ base: 12, sm: 6, md: 3, lg: 2 }}
+                // Wrap each note card in a motion.div with layout enabled
+              >
+                <motion.div layout>
                   <NoteCard
                     note={note}
                     handleClick={() => {
@@ -134,26 +149,33 @@ export default function NoteView() {
                       open();
                     }}
                   />
-                </Grid.Col>
-              ))}
-            </Grid>
-          </Stack>
+                </motion.div>
+              </Grid.Col>
+            ))}
+          </Grid>
         )}
+
         <Space h="xl" />
 
-        {unpinnedNotes.length > 0 && (
-          <Stack gap="xs">
-            {pinnedNotes.length > 0 && (
+        {/* Others Section */}
+        <AnimatePresence>
+          {unpinnedNotes.length > 0 && pinnedNotes.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
               <Text size="xs" c="dimmed" fw={700}>
                 OTHERS
               </Text>
-            )}
-            <Grid gutter={{ base: 10, md: "md", lg: "lg" }}>
-              {unpinnedNotes.map((note) => (
-                <Grid.Col
-                  key={note.id}
-                  span={{ base: 12, sm: 6, md: 3, lg: 2 }}
-                >
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {unpinnedNotes.length > 0 && (
+          <Grid gutter={{ base: 10, md: "md", lg: "lg" }}>
+            {unpinnedNotes.map((note) => (
+              <Grid.Col key={note.id} span={{ base: 12, sm: 6, md: 3, lg: 2 }}>
+                <motion.div layout>
                   <NoteCard
                     note={note}
                     handleClick={() => {
@@ -161,19 +183,15 @@ export default function NoteView() {
                       open();
                     }}
                   />
-                </Grid.Col>
-              ))}
-            </Grid>
-          </Stack>
+                </motion.div>
+              </Grid.Col>
+            ))}
+          </Grid>
         )}
       </Stack>
 
       {selectedNote && (
-        <NoteModal
-          opened={opened}
-          onClose={close}
-          note={selectedNote} // Pass the selected note to the modal
-        />
+        <NoteModal opened={opened} onClose={close} note={selectedNote} />
       )}
       <Note />
     </Container>
