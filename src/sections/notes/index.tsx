@@ -23,6 +23,7 @@ import Note from "./view/Note";
 import NoteModal from "./view/NoteModal";
 
 // Framer Motion imports
+import { IconPencil } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function NoteView() {
@@ -117,7 +118,11 @@ export default function NoteView() {
                     >
                       {(buttonStyles) => (
                         <div style={buttonStyles}>
-                          <Button mt={20} onClick={handleSkip}>
+                          <Button
+                            mt={20}
+                            onClick={handleSkip}
+                            leftSection={<IconPencil size={24} />}
+                          >
                             Start writing
                           </Button>
                         </div>
