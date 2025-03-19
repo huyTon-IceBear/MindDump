@@ -227,6 +227,7 @@ export default function NoteView() {
       {selectedNote && (
         <NoteModal opened={opened} onClose={close} note={selectedNote} />
       )}
+
       <Note />
     </Container>
   );
