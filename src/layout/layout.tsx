@@ -18,7 +18,7 @@ export default function DefaultLayout({ children }: LayoutProps) {
       className={classes.root}
       header={{ height: 55 }}
       navbar={{
-        width: 300,
+        width: opened ? 300 : 100,
         breakpoint: "sm",
         collapsed: { desktop: !displayNavbar },
       }}
