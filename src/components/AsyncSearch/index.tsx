@@ -26,7 +26,7 @@ export default function AsyncSearch() {
 
   useEffect(() => {
     const filtered = notes.filter((note) =>
-      note.text.toLowerCase().includes(searchQuery.toLowerCase())
+      note.text.toLowerCase().includes(searchQuery.toLowerCase()),
     );
     setFilteredNotes(filtered);
   }, [searchQuery, notes]);

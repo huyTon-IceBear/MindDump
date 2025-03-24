@@ -61,7 +61,7 @@ export function useNotesDispatch() {
 
   if (dispatch === null) {
     throw new Error(
-      "useNotesDispatch must be used within a NotesDispatchContextProvider"
+      "useNotesDispatch must be used within a NotesDispatchContextProvider",
     );
   }
 

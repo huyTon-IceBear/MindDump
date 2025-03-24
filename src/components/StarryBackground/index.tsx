@@ -31,7 +31,7 @@ export default function StarryBackground() {
       const vShadow = Math.floor(Math.random() * screenWidth);
       return `${vShadow}px ${hShadow}px ${COLOR}`;
     },
-    []
+    [],
   );
 
   /**
@@ -43,10 +43,10 @@ export default function StarryBackground() {
   const generateStars = useCallback(
     (count: number) => {
       return Array.from({ length: count }, () =>
-        generateRandomStar(width - 50, height - 150)
+        generateRandomStar(width - 50, height - 150),
       );
     },
-    [width, height, generateRandomStar]
+    [width, height, generateRandomStar],
   );
 
   /**

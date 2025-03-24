@@ -117,7 +117,7 @@ export default function Carousel({
                         setSelectedIndex((prevIndex) =>
                           prevIndex >= totalSlides - 1
                             ? Math.max(totalSlides - 2, 0)
-                            : prevIndex
+                            : prevIndex,
                         );
                       }}
                     >

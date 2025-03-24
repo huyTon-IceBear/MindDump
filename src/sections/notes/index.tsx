@@ -38,11 +38,11 @@ export default function NoteView() {
   // Memoize filtered notes to avoid unnecessary re-calculations.
   const pinnedNotes = useMemo(
     () => notes.filter((note) => note.pinned),
-    [notes]
+    [notes],
   );
   const unpinnedNotes = useMemo(
     () => notes.filter((note) => !note.pinned),
-    [notes]
+    [notes],
   );
 
   const dispatch = useNotesDispatch();
