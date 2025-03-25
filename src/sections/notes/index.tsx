@@ -1,93 +1,78 @@
-"use client";
-import CustomInput from "@/components/CustomInput";
-import NoteCard from "@/components/NoteCard";
-import StarryBackground from "@/components/StarryBackground";
-import TypeWriter from "@/components/TypeWriter";
-import { AppIntro } from "@/constant/text";
-import { useNotes, useNotesDispatch } from "@/context/NotesProvider";
-import { ActionTypes, Note as NoteType } from "@/types/note";
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  Grid,
-  Transition as MantineTransition,
-  Space,
-  Stack,
-  Text,
-} from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import Note from "./view/Note";
-import NoteModal from "./view/NoteModal";
-
+'use client'
+import { Box, Button, Container, Flex, Grid, Space, Stack, Text, Transition as MantineTransition } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
 // Framer Motion imports
-import { IconPencil } from "@tabler/icons-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { IconPencil } from '@tabler/icons-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+
+import CustomInput from '@/components/CustomInput'
+import NoteCard from '@/components/NoteCard'
+import StarryBackground from '@/components/StarryBackground'
+import TypeWriter from '@/components/TypeWriter'
+import { AppIntro } from '@/constant/text'
+import { useNotes, useNotesDispatch } from '@/context/NotesProvider'
+import { ActionTypes, Note as NoteType } from '@/types/note'
+
+import Note from './view/Note'
+import NoteModal from './view/NoteModal'
 
 export default function NoteView() {
-  const [showTypeWriter, setShowTypeWriter] = useState(true);
-  const [typewriterComplete, setTypewriterComplete] = useState(false);
-  const [skipTypewriter, setSkipTypewriter] = useState(false);
-  const { notes } = useNotes();
+  const [showTypeWriter, setShowTypeWriter] = useState(true)
+  const [typewriterComplete, setTypewriterComplete] = useState(false)
+  const [skipTypewriter, setSkipTypewriter] = useState(false)
+  const { notes } = useNotes()
 
-  const [opened, { open, close }] = useDisclosure(false);
-  const [selectedNote, setSelectedNote] = useState<NoteType | null>(null); // Store selected note
+  const [opened, { open, close }] = useDisclosure(false)
+  const [selectedNote, setSelectedNote] = useState<NoteType | null>(null) // Store selected note
 
   // Memoize filtered notes to avoid unnecessary re-calculations.
-  const pinnedNotes = useMemo(
-    () => notes.filter((note) => note.pinned),
-    [notes],
-  );
-  const unpinnedNotes = useMemo(
-    () => notes.filter((note) => !note.pinned),
-    [notes],
-  );
+  const pinnedNotes = useMemo(() => notes.filter((note) => note.pinned), [notes])
+  const unpinnedNotes = useMemo(() => notes.filter((note) => !note.pinned), [notes])
 
-  const dispatch = useNotesDispatch();
+  const dispatch = useNotesDispatch()
 
   const handleRemoveAllPinned = () => {
     pinnedNotes.map((note) => {
       const updatedNote = {
         ...note,
         pinned: !note.pinned,
-      };
+      }
 
       dispatch({
         type: ActionTypes.CHANGE_NOTE,
         note: updatedNote,
-      });
-    });
-  };
+      })
+    })
+  }
 
   useEffect(() => {
     if (notes.length > 0) {
-      setShowTypeWriter(false);
+      setShowTypeWriter(false)
     }
-  }, [notes]);
+  }, [notes])
 
   const handleSkip = useCallback(() => {
-    setShowTypeWriter(false);
-  }, []);
+    setShowTypeWriter(false)
+  }, [])
 
   const handleTypewriterComplete = useCallback(() => {
-    setTypewriterComplete(true);
-  }, []);
+    setTypewriterComplete(true)
+  }, [])
 
   const handlePageClick = useCallback(() => {
     if (showTypeWriter && !typewriterComplete) {
-      setSkipTypewriter(true);
-      setTypewriterComplete(true);
+      setSkipTypewriter(true)
+      setTypewriterComplete(true)
     }
-  }, [showTypeWriter, typewriterComplete]);
+  }, [showTypeWriter, typewriterComplete])
 
   useEffect(() => {
-    document.addEventListener("click", handlePageClick);
+    document.addEventListener('click', handlePageClick)
     return () => {
-      document.removeEventListener("click", handlePageClick);
-    };
-  }, [handlePageClick]);
+      document.removeEventListener('click', handlePageClick)
+    }
+  }, [handlePageClick])
 
   return (
     <Container fluid onClick={handlePageClick}>
@@ -96,12 +81,7 @@ export default function NoteView() {
         <Stack w={600}>
           {showTypeWriter ? (
             <Box>
-              <MantineTransition
-                mounted={showTypeWriter}
-                transition="fade"
-                duration={400}
-                timingFunction="ease"
-              >
+              <MantineTransition mounted={showTypeWriter} transition="fade" duration={400} timingFunction="ease">
                 {(styles) => (
                   <div style={styles}>
                     <TypeWriter
@@ -110,19 +90,10 @@ export default function NoteView() {
                       onComplete={handleTypewriterComplete}
                       skip={skipTypewriter}
                     />
-                    <MantineTransition
-                      mounted={typewriterComplete}
-                      transition="fade"
-                      duration={400}
-                      timingFunction="ease"
-                    >
+                    <MantineTransition mounted={typewriterComplete} transition="fade" duration={400} timingFunction="ease">
                       {(buttonStyles) => (
                         <div style={buttonStyles}>
-                          <Button
-                            mt={20}
-                            onClick={handleSkip}
-                            leftSection={<IconPencil size={24} />}
-                          >
+                          <Button mt={20} onClick={handleSkip} leftSection={<IconPencil size={24} />}>
                             Start writing
                           </Button>
                         </div>
@@ -144,11 +115,7 @@ export default function NoteView() {
         {/* Pinned Section */}
         <AnimatePresence>
           {pinnedNotes.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-            >
+            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
               <Flex gap="md" align="center">
                 <Text size="xs" c="dimmed" fw={700}>
                   PINNED
@@ -156,7 +123,7 @@ export default function NoteView() {
                 <Button
                   variant="transparent"
                   onClick={() => {
-                    handleRemoveAllPinned();
+                    handleRemoveAllPinned()
                   }}
                 >
                   <Text size="xs" c="dimmed" fw={700} td="underline">
@@ -168,7 +135,7 @@ export default function NoteView() {
           )}
         </AnimatePresence>
         {pinnedNotes.length > 0 && (
-          <Grid gutter={{ base: 10, md: "md", lg: "lg" }}>
+          <Grid gutter={{ base: 10, md: 'md', lg: 'lg' }}>
             {pinnedNotes.map((note) => (
               <Grid.Col
                 key={note.id}
@@ -179,8 +146,8 @@ export default function NoteView() {
                   <NoteCard
                     note={note}
                     handleClick={() => {
-                      setSelectedNote(note);
-                      open();
+                      setSelectedNote(note)
+                      open()
                     }}
                   />
                 </motion.div>
@@ -194,11 +161,7 @@ export default function NoteView() {
         {/* Others Section */}
         <AnimatePresence>
           {unpinnedNotes.length > 0 && pinnedNotes.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-            >
+            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
               <Text size="xs" c="dimmed" fw={700}>
                 OTHERS
               </Text>
@@ -206,15 +169,15 @@ export default function NoteView() {
           )}
         </AnimatePresence>
         {unpinnedNotes.length > 0 && (
-          <Grid gutter={{ base: 10, md: "md", lg: "lg" }}>
+          <Grid gutter={{ base: 10, md: 'md', lg: 'lg' }}>
             {unpinnedNotes.map((note) => (
               <Grid.Col key={note.id} span={{ base: 12, sm: 6, md: 3, lg: 2 }}>
                 <motion.div layout>
                   <NoteCard
                     note={note}
                     handleClick={() => {
-                      setSelectedNote(note);
-                      open();
+                      setSelectedNote(note)
+                      open()
                     }}
                   />
                 </motion.div>
@@ -224,11 +187,9 @@ export default function NoteView() {
         )}
       </Stack>
 
-      {selectedNote && (
-        <NoteModal opened={opened} onClose={close} note={selectedNote} />
-      )}
+      {selectedNote && <NoteModal opened={opened} onClose={close} note={selectedNote} />}
 
       <Note />
     </Container>
-  );
+  )
 }
