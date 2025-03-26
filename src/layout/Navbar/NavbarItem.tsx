@@ -6,7 +6,6 @@ import { NavbarItemProps } from '@/types/layout'
 export default function NavItem({ icon, label, href, active, navbarOpened }: NavbarItemProps) {
   return (
     <NavLink
-      component="button"
       href={href}
       active={active}
       leftSection={icon}
