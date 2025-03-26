@@ -1,30 +1,30 @@
 import { Note, UploadedImage } from "./note";
 
 export interface CustomQuoteProps {
-    source: string;
-    quote: string;
-};
+  source: string;
+  quote: string;
+}
 
 export interface CustomInputProps {
-    onComplete: (note: string) => void;
-};
+  onComplete: (note: string) => void;
+}
 
 export interface LogoProps {
-    size?: "small" | "normal" | "large";
-};
-  
+  size?: "small" | "normal" | "large";
+}
+
 export interface StarsGroupProps {
-    screenWidth: number;
-    speed: number;
-    delay: number;
-};
+  screenWidth: number;
+  speed: number;
+  delay: number;
+}
 
 export interface TypeWriterProps {
   text: string | string[];
   speed: number;
   onComplete?: () => void;
   skip?: boolean;
-};
+}
 
 export interface EmptyNoteProps {
   description?: string;
@@ -46,7 +46,7 @@ export interface ImageLightboxProps {
   selectedIndex?: number;
 }
 
-export interface NoteCardProps{
+export interface NoteCardProps {
   note: Note;
-  handleClick: ()=>void;
+  handleClick: () => void;
 }

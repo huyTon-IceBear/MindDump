@@ -1,20 +1,20 @@
-"use client";
+'use client'
 
-import { ContextProviderProps, NoteContextType } from "@/types/context";
-import { ActionTypes, Note, NoteAction } from "@/types/note";
-import { nanoid } from "nanoid";
-import { createContext, useContext, useReducer } from "react";
+import { nanoid } from 'nanoid'
+import { createContext, useContext, useReducer } from 'react'
+
+import { ContextProviderProps, NoteContextType } from '@/types/context'
+import { ActionTypes, Note, NoteAction } from '@/types/note'
 
 /**
  * Context for storing the notes state.
  */
-export const NotesContext = createContext<NoteContextType | null>(null);
+export const NotesContext = createContext<NoteContextType | null>(null)
 
 /**
  * Context for storing the dispatch function to update notes.
  */
-export const NotesDispatchContext =
-  createContext<React.Dispatch<NoteAction> | null>(null);
+export const NotesDispatchContext = createContext<React.Dispatch<NoteAction> | null>(null)
 
 /**
  * Provider component for the Notes context.
@@ -24,14 +24,12 @@ export const NotesDispatchContext =
  * @returns The provider component.
  */
 export function NotesProvider({ children }: ContextProviderProps) {
-  const [notes, dispatch] = useReducer(notesReducer, []);
+  const [notes, dispatch] = useReducer(notesReducer, [])
   return (
     <NotesContext.Provider value={{ notes }}>
-      <NotesDispatchContext.Provider value={dispatch}>
-        {children}
-      </NotesDispatchContext.Provider>
+      <NotesDispatchContext.Provider value={dispatch}>{children}</NotesDispatchContext.Provider>
     </NotesContext.Provider>
-  );
+  )
 }
 
 /**
@@ -41,13 +39,13 @@ export function NotesProvider({ children }: ContextProviderProps) {
  * @throws Error if used outside of a NotesProvider.
  */
 export function useNotes() {
-  const context = useContext(NotesContext);
+  const context = useContext(NotesContext)
 
   if (!context) {
-    throw new Error("useNotes must be used within a NotesProvider");
+    throw new Error('useNotes must be used within a NotesProvider')
   }
 
-  return context;
+  return context
 }
 
 /**
@@ -57,15 +55,13 @@ export function useNotes() {
  * @throws Error if used outside of a NotesDispatchContextProvider.
  */
 export function useNotesDispatch() {
-  const dispatch = useContext(NotesDispatchContext);
+  const dispatch = useContext(NotesDispatchContext)
 
   if (dispatch === null) {
-    throw new Error(
-      "useNotesDispatch must be used within a NotesDispatchContextProvider"
-    );
+    throw new Error('useNotesDispatch must be used within a NotesDispatchContextProvider')
   }
 
-  return dispatch;
+  return dispatch
 }
 
 /**
@@ -87,25 +83,25 @@ function notesReducer(notes: Note[], action: NoteAction): Note[] {
           mediaFiles: action.mediaFiles,
           pinned: false,
         },
-      ];
+      ]
     }
     case ActionTypes.CHANGE_NOTE: {
       return notes.map((n) => {
         if (n.id === action.note.id) {
-          return action.note;
+          return action.note
         } else {
-          return n;
+          return n
         }
-      });
+      })
     }
     case ActionTypes.DELETE_NOTE: {
-      return notes.filter((n) => n.id !== action.id);
+      return notes.filter((n) => n.id !== action.id)
     }
     case ActionTypes.REMOVE_NOTES: {
-      return [];
+      return []
     }
     default: {
-      throw Error("Unknown action type!");
+      throw Error('Unknown action type!')
     }
   }
 }

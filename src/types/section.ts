@@ -1,3 +1,3 @@
-export type NoteBoardProps={
-    notes: string[];
-}
+export type NoteBoardProps = {
+  notes: string[];
+};

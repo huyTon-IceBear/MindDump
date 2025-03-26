@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 /**
  * A custom hook that provides the current window dimensions.
- * 
+ *
  * This hook initializes with the current window dimensions and
  * updates them whenever the window is resized.
- * 
+ *
  * @returns {Object} An object containing the current window width and height.
  * @property {number} width - The current width of the window.
  * @property {number} height - The current height of the window.

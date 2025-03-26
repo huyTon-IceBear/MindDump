@@ -1,7 +1,8 @@
-import { EmptyNoteText } from "@/constant/text";
-import { EmptyNoteProps } from "@/types/component";
-import { Stack, Text } from "@mantine/core";
-import { IconBubble } from "@tabler/icons-react";
+import { Stack, Text } from '@mantine/core'
+import { IconBubble } from '@tabler/icons-react'
+
+import { EmptyNoteText } from '@/constant/text'
+import { EmptyNoteProps } from '@/types/component'
 
 export default function EmptyNote({
   description = EmptyNoteText.description,
@@ -12,5 +13,5 @@ export default function EmptyNote({
       {icon}
       <Text>{description}</Text>
     </Stack>
-  );
+  )
 }

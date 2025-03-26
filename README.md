@@ -57,7 +57,7 @@ We appreciate your support in improving MindDump! 🎉
 
 ## 📜 License
 
-This project is licensed under the MIT License. 
+This project is licensed under the MIT License.
 
 ## 📬 Contact
 
