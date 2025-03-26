@@ -1,9 +1,11 @@
-"use client";
-import { COLOR, DELAYS, SPEED } from "@/constant/StarryBackground";
-import { useNotes } from "@/context/NotesProvider";
-import useWindowDimensions from "@/hooks/useWindowDimensions";
-import { useCallback, useEffect, useState } from "react";
-import classes from "./StarryBackground.module.css";
+'use client'
+import { useCallback, useEffect, useState } from 'react'
+
+import { COLOR, DELAYS, SPEED } from '@/constant/StarryBackground'
+import { useNotes } from '@/context/NotesProvider'
+import useWindowDimensions from '@/hooks/useWindowDimensions'
+
+import classes from './StarryBackground.module.css'
 
 /**
  * StarryBackground component
@@ -14,9 +16,9 @@ import classes from "./StarryBackground.module.css";
  * @returns {JSX.Element} The StarryBackground component
  */
 export default function StarryBackground() {
-  const { width, height } = useWindowDimensions();
-  const { notes } = useNotes();
-  const [stars, setStars] = useState<string[]>([]);
+  const { width, height } = useWindowDimensions()
+  const { notes } = useNotes()
+  const [stars, setStars] = useState<string[]>([])
 
   /**
    * Generates a random star position
@@ -25,14 +27,11 @@ export default function StarryBackground() {
    * @param {number} screenHeight - The height of the screen
    * @returns {string} A CSS box-shadow value representing the star's position
    */
-  const generateRandomStar = useCallback(
-    (screenWidth: number, screenHeight: number): string => {
-      const hShadow = Math.floor(Math.random() * screenHeight);
-      const vShadow = Math.floor(Math.random() * screenWidth);
-      return `${vShadow}px ${hShadow}px ${COLOR}`;
-    },
-    []
-  );
+  const generateRandomStar = useCallback((screenWidth: number, screenHeight: number): string => {
+    const hShadow = Math.floor(Math.random() * screenHeight)
+    const vShadow = Math.floor(Math.random() * screenWidth)
+    return `${vShadow}px ${hShadow}px ${COLOR}`
+  }, [])
 
   /**
    * Generates an array of star positions
@@ -42,12 +41,10 @@ export default function StarryBackground() {
    */
   const generateStars = useCallback(
     (count: number) => {
-      return Array.from({ length: count }, () =>
-        generateRandomStar(width - 50, height - 150)
-      );
+      return Array.from({ length: count }, () => generateRandomStar(width - 50, height - 150))
     },
     [width, height, generateRandomStar]
-  );
+  )
 
   /**
    * Updates the stars array based on the number of notes
@@ -55,26 +52,26 @@ export default function StarryBackground() {
   useEffect(() => {
     setStars((prevStars) => {
       if (notes.length === 0) {
-        return [];
+        return []
       }
       if (notes.length > prevStars.length) {
-        const newStars = generateStars(notes.length - prevStars.length);
-        return [...prevStars, ...newStars];
+        const newStars = generateStars(notes.length - prevStars.length)
+        return [...prevStars, ...newStars]
       }
       if (notes.length < prevStars.length) {
-        return prevStars.slice(0, notes.length);
+        return prevStars.slice(0, notes.length)
       }
       // If notes.length === prevStars.length, regenerate all stars
-      return generateStars(notes.length);
-    });
-  }, [notes.length, generateStars]);
+      return generateStars(notes.length)
+    })
+  }, [notes.length, generateStars])
 
   return (
     <div
       style={{
-        background: "rgb(32,33,36)",
-        position: "relative",
-        width: "100%",
+        background: 'rgb(32,33,36)',
+        position: 'relative',
+        width: '100%',
       }}
     >
       {stars.map((star, index) => (
@@ -89,5 +86,5 @@ export default function StarryBackground() {
         ></div>
       ))}
     </div>
-  );
+  )
 }

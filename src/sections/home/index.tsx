@@ -1,19 +1,19 @@
-"use client";
-import CustomQuote from "@/components/CustomQuote";
-import WelcomeComponent from "@/components/Welcome";
-import { Button, Container, Group } from "@mantine/core";
-import Link from "next/link";
-import classes from "./home.module.css";
+'use client'
+import { Button, Container, Group } from '@mantine/core'
+import Link from 'next/link'
+
+import CustomQuote from '@/components/CustomQuote'
+import WelcomeComponent from '@/components/Welcome'
+
+import classes from './home.module.css'
 
 export default function HomeView() {
   return (
     <Container className={classes.inner}>
       <WelcomeComponent />
       <CustomQuote
-        source={
-          "Thoughts disentangle themselves when they pass through the lips and fingertips."
-        }
-        quote={"Dawson Trotman"}
+        source={'Thoughts disentangle themselves when they pass through the lips and fingertips.'}
+        quote={'Dawson Trotman'}
       />
       <Group className={classes.controls}>
         <Button
@@ -41,5 +41,5 @@ export default function HomeView() {
         </Button>
       </Group>
     </Container>
-  );
+  )
 }

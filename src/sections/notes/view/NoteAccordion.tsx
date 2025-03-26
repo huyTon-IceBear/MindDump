@@ -1,67 +1,58 @@
-import { NotificationMessages } from "@/constant/notification";
-import { useNotes, useNotesDispatch } from "@/context/NotesProvider";
-import { ActionOptions, ActionTypes, Note } from "@/types/note";
-import { truncateText } from "@/utils";
-import {
-  Accordion,
-  AccordionControlProps,
-  ActionIcon,
-  Center,
-  Menu,
-} from "@mantine/core";
-import { useClipboard, useDisclosure } from "@mantine/hooks";
-import { notifications } from "@mantine/notifications";
-import { IconCopy, IconDots, IconEye, IconTrash } from "@tabler/icons-react";
-import { useState } from "react";
-import NoteModal from "./NoteModal";
+import { Accordion, AccordionControlProps, ActionIcon, Center, Menu } from '@mantine/core'
+import { useClipboard, useDisclosure } from '@mantine/hooks'
+import { notifications } from '@mantine/notifications'
+import { IconCopy, IconDots, IconEye, IconTrash } from '@tabler/icons-react'
+import { useState } from 'react'
+
+import { NotificationMessages } from '@/constant/notification'
+import { useNotes, useNotesDispatch } from '@/context/NotesProvider'
+import { ActionOptions, ActionTypes, Note } from '@/types/note'
+import { truncateText } from '@/utils'
+
+import NoteModal from './NoteModal'
 
 function AccordionControl({
   note,
   onView,
   ...props
 }: {
-  note: Note;
-  onView: () => void;
+  note: Note
+  onView: () => void
 } & AccordionControlProps) {
-  const dispatch = useNotesDispatch();
-  const clipboard = useClipboard({ timeout: 500 });
+  const dispatch = useNotesDispatch()
+  const clipboard = useClipboard({ timeout: 500 })
 
   const handleSelectOption = (option: ActionOptions) => {
     switch (option) {
       case ActionOptions.View:
-        onView(); // Use the open function here
-        break;
+        onView() // Use the open function here
+        break
       case ActionOptions.Copy:
-        clipboard.copy(note.text);
+        clipboard.copy(note.text)
         notifications.show({
-          position: "top-right",
+          position: 'top-right',
           title: NotificationMessages.COPY_NOTE.title,
           message: NotificationMessages.COPY_NOTE.message,
           autoClose: 1500,
-        });
-        break;
+        })
+        break
       case ActionOptions.Remove:
-        dispatch({ type: ActionTypes.DELETE_NOTE, id: note.id });
+        dispatch({ type: ActionTypes.DELETE_NOTE, id: note.id })
         notifications.show({
-          position: "top-right",
+          position: 'top-right',
           title: NotificationMessages.DELETE_NOTE.title,
           message: NotificationMessages.DELETE_NOTE.message,
           autoClose: 1500,
-        });
-        break;
+        })
+        break
     }
-  };
+  }
 
   return (
     <>
       <Center>
         <Accordion.Control {...props} onClick={(e) => e.stopPropagation()} />
-        <Menu
-          shadow="md"
-          width={100}
-          position="bottom-end"
-          withinPortal={false}
-        >
+        <Menu shadow="md" width={100} position="bottom-end" withinPortal={false}>
           <Menu.Target>
             <ActionIcon size="lg" variant="subtle" color="gray">
               <IconDots size="1rem" />
@@ -71,15 +62,12 @@ function AccordionControl({
             <Menu.Item
               leftSection={<IconEye size={14} />}
               onClick={() => {
-                handleSelectOption(ActionOptions.View);
+                handleSelectOption(ActionOptions.View)
               }}
             >
               View
             </Menu.Item>
-            <Menu.Item
-              leftSection={<IconCopy size={14} />}
-              onClick={() => handleSelectOption(ActionOptions.Copy)}
-            >
+            <Menu.Item leftSection={<IconCopy size={14} />} onClick={() => handleSelectOption(ActionOptions.Copy)}>
               Copy
             </Menu.Item>
             <Menu.Item
@@ -93,17 +81,17 @@ function AccordionControl({
         </Menu>
       </Center>
     </>
-  );
+  )
 }
 
 export default function NoteAccordion() {
-  const { notes } = useNotes();
-  const [opened, { open, close }] = useDisclosure(false); // Move state management here
-  const [selectedNote, setSelectedNote] = useState<Note | null>(null); // Store selected note
+  const { notes } = useNotes()
+  const [opened, { open, close }] = useDisclosure(false) // Move state management here
+  const [selectedNote, setSelectedNote] = useState<Note | null>(null) // Store selected note
   const handleView = (note: Note) => {
-    setSelectedNote(note); // Set the selected note
-    open(); // Open the modal
-  };
+    setSelectedNote(note) // Set the selected note
+    open() // Open the modal
+  }
 
   return (
     <>
@@ -126,5 +114,5 @@ export default function NoteAccordion() {
         />
       )}
     </>
-  );
+  )
 }
