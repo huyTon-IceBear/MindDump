@@ -2,7 +2,7 @@ import { Text, Title } from '@mantine/core'
 
 import { WelcomeText } from '@/constant/text'
 
-import classes from './Welcome.module.css'
+import classes from './welcome.module.css'
 
 export default function WelcomeComponent() {
   return (

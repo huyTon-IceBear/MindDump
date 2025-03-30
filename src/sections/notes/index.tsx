@@ -86,7 +86,7 @@ export default function NoteView() {
                   <div style={styles}>
                     <TypeWriter
                       text={[AppIntro.line1, AppIntro.line2]}
-                      speed={50}
+                      speed={20}
                       onComplete={handleTypewriterComplete}
                       skip={skipTypewriter}
                     />

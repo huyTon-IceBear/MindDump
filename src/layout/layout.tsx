@@ -11,7 +11,7 @@ import classes from './layout.module.css'
 import Navbar from './Navbar'
 
 export default function DefaultLayout({ children }: LayoutProps) {
-  const [opened, { toggle }] = useDisclosure()
+  const [opened, { toggle }] = useDisclosure(true)
   const theme = useMantineTheme()
   const pathname = usePathname()
   const displayNavbar = pathname !== '/'

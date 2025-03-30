@@ -1,52 +1,58 @@
-import { Note, UploadedImage } from "./note";
+import { Note, UploadedImage } from './note'
 
 export interface CustomQuoteProps {
-  source: string;
-  quote: string;
+  source: string
+  quote: string
 }
 
 export interface CustomInputProps {
-  onComplete: (note: string) => void;
+  onComplete: (note: string) => void
 }
 
 export interface LogoProps {
-  size?: "small" | "normal" | "large";
+  size?: 'small' | 'normal' | 'large'
 }
 
 export interface StarsGroupProps {
-  screenWidth: number;
-  speed: number;
-  delay: number;
+  screenWidth: number
+  speed: number
+  delay: number
 }
 
 export interface TypeWriterProps {
-  text: string | string[];
-  speed: number;
-  onComplete?: () => void;
-  skip?: boolean;
+  text: string | string[]
+  speed: number
+  onComplete?: () => void
+  skip?: boolean
 }
 
 export interface EmptyNoteProps {
-  description?: string;
-  icon?: React.ReactNode;
+  description?: string
+  icon?: React.ReactNode
 }
 
 export interface CarouselProps {
-  sliderData: UploadedImage[];
-  onDelete: (imageID: string) => void;
-  canEdit?: boolean;
+  sliderData: UploadedImage[]
+  onDelete: (imageID: string) => void
+  canEdit?: boolean
 }
 
 export interface ImageDropzoneProps {
-  onDrop: (files: UploadedImage[]) => void;
+  onDrop: (files: UploadedImage[]) => void
 }
 export interface ImageLightboxProps {
-  onClose: () => void;
-  images: UploadedImage[];
-  selectedIndex?: number;
+  onClose: () => void
+  images: UploadedImage[]
+  selectedIndex?: number
 }
 
 export interface NoteCardProps {
-  note: Note;
-  handleClick: () => void;
+  note: Note
+  handleClick: () => void
+}
+
+export interface TextEditorProps {
+  value: string
+  useLiteVariant?: boolean
+  onChange: (value: string) => void
 }
