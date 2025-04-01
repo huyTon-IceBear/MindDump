@@ -51,13 +51,6 @@ export default function AsyncSearch() {
 
   return (
     <>
-      {/* {selectedNote && (
-        <NoteModal
-          opened={false}
-          onClose={close}
-          note={selectedNote} // Pass the selected note to the modal
-        />
-      )} */}
       <Modal opened={opened} onClose={close} size="lg" withCloseButton={false}>
         <TextInput
           placeholder="Search documentation..."

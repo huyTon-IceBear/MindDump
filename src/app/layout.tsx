@@ -36,10 +36,10 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <MantineProvider>
-          <Notifications />
-          <DefaultLayout>
-            <NotesProvider>{children}</NotesProvider>
-          </DefaultLayout>
+          <NotesProvider>
+            <Notifications />
+            <DefaultLayout>{children}</DefaultLayout>
+          </NotesProvider>
         </MantineProvider>
       </body>
     </html>

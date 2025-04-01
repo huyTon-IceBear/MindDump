@@ -1,14 +1,17 @@
 import { Box, Button, Stack } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
 import { IconArchive, IconNotes, IconPencil, IconTrash } from '@tabler/icons-react'
 import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 
+import CustomInput from '@/components/CustomInput'
 import { NavbarProps } from '@/types/layout'
 
 import NavItem from './NavbarItem'
 
 export default function Navbar({ navbarOpened }: NavbarProps) {
   const pathname = usePathname()
+  const [opened, { open, close }] = useDisclosure(false)
 
   return (
     <Box>
@@ -28,7 +31,7 @@ export default function Navbar({ navbarOpened }: NavbarProps) {
             size="sm"
             w={navbarOpened ? 150 : 60}
             mih={60}
-            onClick={() => {}}
+            onClick={open}
             leftSection={navbarOpened && <IconPencil size={24} />}
             radius={15}
           >
@@ -60,6 +63,7 @@ export default function Navbar({ navbarOpened }: NavbarProps) {
           </Stack>
         </Stack>
       </motion.div>
+      <CustomInput opened={opened} onClose={close} />
     </Box>
   )
 }

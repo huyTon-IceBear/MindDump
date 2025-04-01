@@ -2,7 +2,7 @@
 import { Box, Button, Container, Flex, Grid, Space, Stack, Text, Transition as MantineTransition } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 // Framer Motion imports
-import { IconPencil } from '@tabler/icons-react'
+import { IconBubble, IconPencil } from '@tabler/icons-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -10,12 +10,11 @@ import CustomInput from '@/components/CustomInput'
 import NoteCard from '@/components/NoteCard'
 import StarryBackground from '@/components/StarryBackground'
 import TypeWriter from '@/components/TypeWriter'
-import { AppIntro } from '@/constant/text'
+import { AppIntro, EmptyNoteText } from '@/constant/text'
 import { useNotes, useNotesDispatch } from '@/context/NotesProvider'
 import { ActionTypes, Note as NoteType } from '@/types/note'
 
 import Note from './view/Note'
-import NoteModal from './view/NoteModal'
 
 export default function NoteView() {
   const [showTypeWriter, setShowTypeWriter] = useState(true)
@@ -79,7 +78,7 @@ export default function NoteView() {
       <Stack align="center" justify="center" gap="md">
         <StarryBackground />
         <Stack w={600}>
-          {showTypeWriter ? (
+          {showTypeWriter && (
             <Box>
               <MantineTransition mounted={showTypeWriter} transition="fade" duration={400} timingFunction="ease">
                 {(styles) => (
@@ -103,91 +102,96 @@ export default function NoteView() {
                 )}
               </MantineTransition>
             </Box>
-          ) : (
-            <CustomInput />
           )}
         </Stack>
       </Stack>
 
-      <Space h="xl" />
-
-      <Stack>
-        {/* Pinned Section */}
-        <AnimatePresence>
-          {pinnedNotes.length > 0 && (
-            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
-              <Flex gap="md" align="center">
-                <Text size="xs" c="dimmed" fw={700}>
-                  PINNED
-                </Text>
-                <Button
-                  variant="transparent"
-                  onClick={() => {
-                    handleRemoveAllPinned()
-                  }}
-                >
-                  <Text size="xs" c="dimmed" fw={700} td="underline">
-                    Remove all pins
+      {notes?.length > 0 ? (
+        <Stack>
+          {/* Pinned Section */}
+          <AnimatePresence>
+            {pinnedNotes.length > 0 && (
+              <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
+                <Flex gap="md" align="center">
+                  <Text size="xs" c="dimmed" fw={700}>
+                    PINNED
                   </Text>
-                </Button>
-              </Flex>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        {pinnedNotes.length > 0 && (
-          <Grid gutter={{ base: 10, md: 'md', lg: 'lg' }}>
-            {pinnedNotes.map((note) => (
-              <Grid.Col
-                key={note.id}
-                span={{ base: 12, sm: 6, md: 3, lg: 2 }}
-                // Wrap each note card in a motion.div with layout enabled
-              >
-                <motion.div layout>
-                  <NoteCard
-                    note={note}
-                    handleClick={() => {
-                      setSelectedNote(note)
-                      open()
+                  <Button
+                    variant="transparent"
+                    onClick={() => {
+                      handleRemoveAllPinned()
                     }}
-                  />
-                </motion.div>
-              </Grid.Col>
-            ))}
-          </Grid>
-        )}
-
-        <Space h="xl" />
-
-        {/* Others Section */}
-        <AnimatePresence>
-          {unpinnedNotes.length > 0 && pinnedNotes.length > 0 && (
-            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
-              <Text size="xs" c="dimmed" fw={700}>
-                OTHERS
-              </Text>
-            </motion.div>
+                  >
+                    <Text size="xs" c="dimmed" fw={700} td="underline">
+                      Remove all pins
+                    </Text>
+                  </Button>
+                </Flex>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {pinnedNotes.length > 0 && (
+            <Grid gutter={{ base: 10, md: 'md', lg: 'lg' }}>
+              {pinnedNotes.map((note) => (
+                <Grid.Col
+                  key={note.id}
+                  span={{ base: 12, sm: 6, md: 3, lg: 2 }}
+                  // Wrap each note card in a motion.div with layout enabled
+                >
+                  <motion.div layout>
+                    <NoteCard
+                      note={note}
+                      handleClick={() => {
+                        setSelectedNote(note)
+                        open()
+                      }}
+                    />
+                  </motion.div>
+                </Grid.Col>
+              ))}
+            </Grid>
           )}
-        </AnimatePresence>
-        {unpinnedNotes.length > 0 && (
-          <Grid gutter={{ base: 10, md: 'md', lg: 'lg' }}>
-            {unpinnedNotes.map((note) => (
-              <Grid.Col key={note.id} span={{ base: 12, sm: 6, md: 3, lg: 2 }}>
-                <motion.div layout>
-                  <NoteCard
-                    note={note}
-                    handleClick={() => {
-                      setSelectedNote(note)
-                      open()
-                    }}
-                  />
-                </motion.div>
-              </Grid.Col>
-            ))}
-          </Grid>
-        )}
-      </Stack>
 
-      {selectedNote && <NoteModal opened={opened} onClose={close} note={selectedNote} />}
+          <Space h="xl" />
+
+          {/* Others Section */}
+          <AnimatePresence>
+            {unpinnedNotes.length > 0 && pinnedNotes.length > 0 && (
+              <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
+                <Text size="xs" c="dimmed" fw={700}>
+                  OTHERS
+                </Text>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {unpinnedNotes.length > 0 && (
+            <Grid gutter={{ base: 10, md: 'md', lg: 'lg' }}>
+              {unpinnedNotes.map((note) => (
+                <Grid.Col key={note.id} span={{ base: 12, sm: 6, md: 3, lg: 2 }}>
+                  <motion.div layout>
+                    <NoteCard
+                      note={note}
+                      handleClick={() => {
+                        setSelectedNote(note)
+                        open()
+                      }}
+                    />
+                  </motion.div>
+                </Grid.Col>
+              ))}
+            </Grid>
+          )}
+        </Stack>
+      ) : (
+        <Stack align="center" justify="center" h={600} gap="lg">
+          <IconBubble size={150} color="#36373b" />
+          <Text size="xl" c="dimmed">
+            {EmptyNoteText.description}
+          </Text>
+        </Stack>
+      )}
+
+      {selectedNote && <CustomInput opened={opened} onClose={close} note={selectedNote} isEdit={true} />}
 
       <Note />
     </Container>

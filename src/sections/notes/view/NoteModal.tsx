@@ -1,6 +1,5 @@
 import { Button, Modal, Stack, Text, TextInput } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
-import React from 'react'
 import { useEffect, useState } from 'react'
 
 import Carousel from '@/components/Carousel'
@@ -13,10 +12,11 @@ import { handleRemoveImage } from '@/utils'
 interface NoteModalProps {
   opened: boolean
   onClose: () => void
-  note: Note | null
+  note?: Note | null
+  isEdit?: boolean
 }
 
-export default function NoteModal({ opened, onClose, note }: NoteModalProps) {
+export default function NoteModal({ opened, onClose, note, isEdit = false }: NoteModalProps) {
   const [editMode, setEditMode] = useState(false)
   const [editedText, setEditedText] = useState('')
   const dispatch = useNotesDispatch()
